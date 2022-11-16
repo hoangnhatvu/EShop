@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+          http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+    version="2.1">
+	<persistence-unit name="EShopJpaSQL">
+	
+	<class>hcmute.vn.entity.Cart</class>
+	<class>hcmute.vn.entity.CartItem</class>
+	<class>hcmute.vn.entity.Category</class>
+	<class>hcmute.vn.entity.Commission</class>
+	<class>hcmute.vn.entity.Delivery</class>	
+	<class>hcmute.vn.entity.OrderItem</class>
+	<class>hcmute.vn.entity.Orders</class>
+	<class>hcmute.vn.entity.Product</class>
+	<class>hcmute.vn.entity.Store</class>
+	<class>hcmute.vn.entity.StoreLevel</class>
+	<class>hcmute.vn.entity.Style</class>
+	<class>hcmute.vn.entity.StyleValue</class>
+	<class>hcmute.vn.entity.Transactions</class>
+	<class>hcmute.vn.entity.UserFollowProduct</class>
+	<class>hcmute.vn.entity.UserFollowStore</class>
+	<class>hcmute.vn.entity.UserLevel</class>
+	<class>hcmute.vn.entity.Users</class>
+	
+		<properties>
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:sqlserver://localhost:1433;databaseName=EShop;integratedSecurity=true" />
+
+			<property name="javax.persistence.jdbc.driver"
+				value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+
+			<property name="javax.persistence.jdbc.user" value="" />
+
+			<property name="javax.persistence.jdbc.password"
+				value="" />
+
+			<property name="hibernate.show_sql" value="true" />
+
+			<property name="hibernate.format_sql" value="true" />
+
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<property name="hibernate.dialect" value="org.hibernate.dialect.SQLServerDialect" />			
+           
+			<!--<property name="hibernate.hbm2ddl.auto" value="create" /> -->
+		</properties>
+	</persistence-unit>
+</persistence>

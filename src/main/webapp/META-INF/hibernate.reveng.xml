@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+	<table-filter match-name="Cart" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="CartItem" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Category" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Commission" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Delivery" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="OrderItem" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Orders" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Product" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Store" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="StoreLevel" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Style" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="StyleValue" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Transactions" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="UserFollowProduct" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="UserFollowStore" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="UserLevel" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+	<table-filter match-name="Users" match-catalog="EShop"
+		match-schema="dbo">
+	</table-filter>
+</hibernate-reverse-engineering>
