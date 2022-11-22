@@ -1,10 +1,8 @@
 package hcmute.vn.entity;
-// Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -26,6 +24,8 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "Store", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 public class Store implements java.io.Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private Users users;
@@ -39,12 +39,12 @@ public class Store implements java.io.Serializable {
 	private BigDecimal EWallet;
 	private Date createdAt;
 	private Date updateAt;
-	private Set<UserFollowStore> userFollowStores = new HashSet<UserFollowStore>(0);
-	private Set<Orders> orderses = new HashSet<Orders>(0);
-	private Set<Product> products = new HashSet<Product>(0);
-	private Set<Cart> carts = new HashSet<Cart>(0);
+	private List<UserFollowStore> userFollowStores;
+	private List<Orders> orderses;
+	private List<Product> products;
+	private List<Cart> carts;
 	private StoreLevel storeLevel;
-	private Set<Transactions> transactionses = new HashSet<Transactions>(0);
+	private List<Transactions> transactionses;
 
 	public Store() {
 	}
@@ -57,8 +57,8 @@ public class Store implements java.io.Serializable {
 
 	public Store(Users users, String name, String bio, Integer staffIds, Boolean isActive, Boolean isOpen,
 			String avatar, Integer rating, BigDecimal EWallet, Date createdAt, Date updateAt,
-			Set<UserFollowStore> userFollowStores, Set<Orders> orderses, Set<Product> products, Set<Cart> carts,
-			StoreLevel storeLevel, Set<Transactions> transactionses) {
+			List<UserFollowStore> userFollowStores, List<Orders> orderses, List<Product> products, List<Cart> carts,
+			StoreLevel storeLevel, List<Transactions> transactionses) {
 		this.users = users;
 		this.name = name;
 		this.bio = bio;
@@ -193,38 +193,38 @@ public class Store implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-	public Set<UserFollowStore> getUserFollowStores() {
+	public List<UserFollowStore> getUserFollowStores() {
 		return this.userFollowStores;
 	}
 
-	public void setUserFollowStores(Set<UserFollowStore> userFollowStores) {
+	public void setUserFollowStores(List<UserFollowStore> userFollowStores) {
 		this.userFollowStores = userFollowStores;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-	public Set<Orders> getOrderses() {
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-	public Set<Product> getProducts() {
+	public List<Product> getProducts() {
 		return this.products;
 	}
 
-	public void setProducts(Set<Product> products) {
+	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-	public Set<Cart> getCarts() {
+	public List<Cart> getCarts() {
 		return this.carts;
 	}
 
-	public void setCarts(Set<Cart> carts) {
+	public void setCarts(List<Cart> carts) {
 		this.carts = carts;
 	}
 
@@ -238,11 +238,11 @@ public class Store implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
-	public Set<Transactions> getTransactionses() {
+	public List<Transactions> getTransactionses() {
 		return this.transactionses;
 	}
 
-	public void setTransactionses(Set<Transactions> transactionses) {
+	public void setTransactionses(List<Transactions> transactionses) {
 		this.transactionses = transactionses;
 	}
 

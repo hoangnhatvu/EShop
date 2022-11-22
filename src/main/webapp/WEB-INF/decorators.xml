@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<decorators defaultdir="/decorators">
-	<excludes>
-		<pattern>/api*</pattern>
-		<pattern>/login*</pattern>
-	</excludes>
+<decorators defaultdir="/decorators">	
 	<!-- apply Sitemesh default template -->
-	<decorator name="admin" page="admin.jsp">
-		<pattern>/admin*</pattern>
-	</decorator>
 	<decorator name="user" page="user.jsp">
-		<pattern>/user*</pattern>
+		<pattern>/*</pattern>
 	</decorator>
 	<decorator name="vendor" page="vendor.jsp">
 		<pattern>/vendor*</pattern>
 	</decorator>
 </decorators>
+
