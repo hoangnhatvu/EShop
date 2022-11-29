@@ -8,7 +8,13 @@
 	</div>
 
 	<div class="container" style="width: 50%; text-align: center;">
-		<div class="alert alert-success" role="alert">Sign up successful</div>
+	
+		<c:if test="${message != null}">
+
+			<div class="alert alert-success" role="alert">${message}</div>
+
+		</c:if>
+	
 		<form class="row g-3" role="form" action="sign_up" method="post">
 			<div class="col-md-6" style="text-align: left;">
 				<label for="firstName" class="form-label">First name</label> <input
@@ -20,11 +26,11 @@
 			</div>
 			<div class="col-12" style="text-align: left;">
 				<label for="email" class="form-label">Email</label> <input
-					name="email" type="email" class="form-control" id="email">
+					name="email" required="required" type="email" class="form-control" id="email">
 			</div>
 			<div class="col-12" style="text-align: left;">
 				<label for="password" class="form-label">Password</label> <input
-					name="password" type="password" class="form-control" id="password">
+					name="password" required="required" type="password" class="form-control" id="password">
 			</div>
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary">Sign	up</button>

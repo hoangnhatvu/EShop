@@ -1,7 +1,10 @@
 package hcmute.vn.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IStoreDao;
@@ -36,5 +39,14 @@ public class StoreDaoImpl implements IStoreDao {
 			enma.close();
 
 		}
+	}
+	public List<Store> findAll() {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		TypedQuery<Store> query = enma.createNamedQuery("Store.findAll", Store.class);
+
+		return query.getResultList();
+
 	}
 }

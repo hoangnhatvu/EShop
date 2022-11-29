@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import hcmute.vn.entity.Users;
 import hcmute.vn.service.IUserService;
@@ -26,7 +27,7 @@ public class LoginController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 
-			throws ServletException, IOException {
+			throws ServletException, IOException {		
 
 		request.getRequestDispatcher("/views/user/login.jsp").forward(request, response);
 
@@ -44,27 +45,23 @@ public class LoginController extends HttpServlet {
 			
 			String email = request.getParameter("email");
 			
-			System.out.println(email);
-			
 			Users user = userService.findByEmail(email);	
 			
-			System.out.println(user.getHashedPassword());
-
 			String password = request.getParameter("password");	
-			
-			System.out.println(password);
-
 			
 			HashPassword pw = new HashPassword();
 
-			String hashPass = pw.hash(password);	
-			
-			System.out.println(hashPass);
+			String hashPass = pw.hash(password);				
 				
 			if(hashPass.equals(user.getHashedPassword())) {
-				System.out.println("dfgdfgdfffffffffffffffffffffffffffffffffffffffffff");
+				
 				if(user.getRole() == 2) {
-					response.sendRedirect(request.getContextPath() + "/vendor/home");
+					
+					HttpSession session=request.getSession();
+					
+					session.setAttribute("ownerId",user.getId().toString());
+					
+					response.sendRedirect(request.getContextPath() + "/vendor/store/add");
 				}
 			}
 
