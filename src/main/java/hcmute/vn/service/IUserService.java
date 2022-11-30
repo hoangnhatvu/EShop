@@ -1,6 +1,5 @@
 package hcmute.vn.service;
 
-import hcmute.vn.entity.Product;
 import hcmute.vn.entity.Users;
 
 import java.util.List;
@@ -10,4 +9,5 @@ public interface IUserService {
 	public Users findByEmail(String email);
 	public List<Users> findUsersByName(String searchString);
 
+	public Users findById(int userid);
 }

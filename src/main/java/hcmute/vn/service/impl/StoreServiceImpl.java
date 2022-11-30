@@ -20,4 +20,9 @@ public class StoreServiceImpl implements IStoreService{
 	public List<Store> findStoresByName(String searchString) {
 		return storeDao.findStoresByName(searchString);
 	}
+
+	@Override
+	public List<Store> findAll() {
+		return storeDao.findAll();
+	}
 }

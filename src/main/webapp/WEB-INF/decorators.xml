@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/decorators">	
-	<!-- apply Sitemesh default template -->
+	<excludes>
+		<pattern>/templates/*</pattern>
+	</excludes>
+	
 	<decorator name="user" page="user.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	
 	<decorator name="vendor" page="vendor.jsp">
-		<pattern>/vendor*</pattern>
+		<pattern>/vendor/*</pattern>
 	</decorator>
 </decorators>
 

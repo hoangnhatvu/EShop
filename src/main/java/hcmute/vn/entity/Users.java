@@ -19,6 +19,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 @Table(name = "Users", schema = "dbo", catalog = "EShop", uniqueConstraints = { @UniqueConstraint(columnNames = "slug"),
 		@UniqueConstraint(columnNames = "email") })
@@ -146,7 +149,9 @@ public class Users implements Serializable {
 	public void setIdCard(String idCard) {
 		this.idCard = idCard;
 	}
-
+	
+	@Email(message = "Email không hợp lệ")
+	@NotEmpty
 	@Column(name = "email", unique = true)
 	public String getEmail() {
 		return this.email;
@@ -183,6 +188,7 @@ public class Users implements Serializable {
 		this.isPhoneActive = isPhoneActive;
 	}
 
+	@NotEmpty
 	@Column(name = "hashed_password", nullable = false)
 	public String getHashedPassword() {
 		return this.hashedPassword;

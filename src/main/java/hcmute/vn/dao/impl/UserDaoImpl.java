@@ -50,6 +50,14 @@ public class UserDaoImpl implements IUserDao {
 
 		return user;
 	}
+	
+	public Users findById(int userid) {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		Users user = enma.find(Users.class, userid);
+
+		return user;
+	}
 
 	@Override
 	public List<Users> findUsersByName(String searchString) {
