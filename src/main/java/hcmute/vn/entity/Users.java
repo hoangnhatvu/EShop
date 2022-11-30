@@ -184,7 +184,7 @@ public class Users implements Serializable {
 	}
 
 	@Column(name = "hashed_password", nullable = false)
-	public Serializable getHashedPassword() {
+	public String getHashedPassword() {
 		return this.hashedPassword;
 	}
 
@@ -202,7 +202,7 @@ public class Users implements Serializable {
 	}
 
 	@Column(name = "addresses")
-	public Serializable getAddresses() {
+	public String getAddresses() {
 		return this.addresses;
 	}
 

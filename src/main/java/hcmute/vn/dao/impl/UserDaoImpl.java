@@ -5,7 +5,10 @@ import javax.persistence.EntityTransaction;
 
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IUserDao;
+import hcmute.vn.entity.Store;
 import hcmute.vn.entity.Users;
+
+import java.util.List;
 
 public class UserDaoImpl implements IUserDao {
 	
@@ -46,6 +49,13 @@ public class UserDaoImpl implements IUserDao {
 		Users user = (Users)enma.createQuery("FROM Users U WHERE U.email = :email").setParameter("email", email).getSingleResult();				
 
 		return user;
+	}
+
+	@Override
+	public List<Users> findUsersByName(String searchString) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		List<Users> users = (List<Users>) enma.createQuery("FROM Users U WHERE U.firstName like :name or U.lastName like :name").setParameter("name", "%" + searchString + "%").getResultList();
+		return users;
 	}
 
 }

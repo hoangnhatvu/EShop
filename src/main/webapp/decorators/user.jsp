@@ -3,6 +3,7 @@
 <%@ taglib prefix="decorator"
 	uri="http://www.opensymphony.com/sitemesh/decorator"%>
 <%@ taglib prefix ="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <c:url value="/templates/" var="URL"></c:url>
 
 <!DOCTYPE html>
@@ -14,8 +15,11 @@
     <title>EShop</title>
     <!-- CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-	
+
     <link href="${URL}css/boostrap.min.css" rel="stylesheet" type="text/css">
+
+	<!-- Font awsome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <%@ include file="/common/user/header.jsp"%>
 </head>
 

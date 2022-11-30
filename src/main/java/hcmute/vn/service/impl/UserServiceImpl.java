@@ -5,6 +5,8 @@ import hcmute.vn.dao.impl.UserDaoImpl;
 import hcmute.vn.entity.Users;
 import hcmute.vn.service.IUserService;
 
+import java.util.List;
+
 public class UserServiceImpl implements IUserService{
 	IUserDao userDao = new UserDaoImpl();
 	
@@ -16,5 +18,10 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public Users findByEmail(String email) {
 		return userDao.findByEmail(email);
+	}
+
+	@Override
+	public List<Users> findUsersByName(String searchString) {
+		return userDao.findUsersByName(searchString);
 	}
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:url value="/templates/" var="URL"></c:url>
 
 <link href="${URL}css/headers.css" rel="stylesheet/css">
@@ -33,7 +34,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="<%=request.getContextPath()%>/product" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"/></svg>
                 Products
               </a>
@@ -50,8 +51,9 @@
     </div>
     <div class="px-3 py-2 border-bottom mb-3">
       <div class="container d-flex flex-wrap justify-content-center">
-        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
-          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+        <form action="<%=request.getContextPath()%>/search" method="post" class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+          <input type="search" name="searchString" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+          <button class="input-group-text border-0" id="search-addon"><i class="fa fa-search"></i></button>
         </form>
 
         <div class="text-end">

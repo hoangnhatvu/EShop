@@ -15,9 +15,9 @@ import org.apache.commons.beanutils.BeanUtils;
 import hcmute.vn.entity.Store;
 import hcmute.vn.service.IStoreService;
 import hcmute.vn.service.impl.StoreServiceImpl;
-import iotstar.vn.Util.Constant;
-import iotstar.vn.Util.UploadUtils;
-import iotstar.vn.entity.Category;
+import hcmute.vn.util.Constant;
+import hcmute.vn.util.UploadUtils;
+import hcmute.vn.entity.Category;
 
 public class AddStoreController extends HttpServlet{
 	
@@ -52,13 +52,13 @@ public class AddStoreController extends HttpServlet{
 
 			// xử lý hình ảnh
 
-			String fileName = category.getCategorycode() + System.currentTimeMillis();
+			//String fileName = category.getCategorycode() + System.currentTimeMillis();
 
-			category.setImages(UploadUtils.processUpload("images", request, Constant.DIR + "\\category\\", fileName));
+			//category.setImages(UploadUtils.processUpload("images", request, Constant.DIR + "\\category\\", fileName));
 			
 			// gọi hàm insert để thêm dữ liệu
 
-			categoryService.insert(category);					
+			//categoryService.insert(category);
 
 			// thông báo
 

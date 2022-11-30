@@ -29,18 +29,18 @@ public class Product implements java.io.Serializable {
 
 	private Integer id;
 	private Store store;
-	private Serializable name;
-	private Serializable slug;
-	private Serializable desciption;
+	private String name;
+	private String slug;
+	private String desciption;
 	private BigDecimal price;
 	private BigDecimal promotionalPrice;
 	private int quantity;
 	private Integer slod;
 	private Boolean isActive;
 	private Boolean isSelling;
-	private Serializable listImage;
+	private String listImage;
 	private Integer categoryId;
-	private Serializable styleValueIds;
+	private String styleValueIds;
 	private Integer rating;
 	private Date createAt;
 	private Date updateAt;
@@ -51,7 +51,7 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(Serializable name, Serializable desciption, BigDecimal price, BigDecimal promotionalPrice,
+	public Product(String name, String desciption, BigDecimal price, BigDecimal promotionalPrice,
 			int quantity) {
 		this.name = name;
 		this.desciption = desciption;
@@ -60,9 +60,9 @@ public class Product implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	public Product(Store store, Serializable name, Serializable slug, Serializable desciption, BigDecimal price,
+	public Product(Store store, String name, String slug, String desciption, BigDecimal price,
 			BigDecimal promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
-			Serializable listImage, Integer categoryId, Serializable styleValueIds, Integer rating, Date createAt,
+			String listImage, Integer categoryId, String styleValueIds, Integer rating, Date createAt,
 			Date updateAt, Set<UserFollowProduct> userFollowProducts, Set<CartItem> cartItems,
 			Set<OrderItem> orderItems) {
 		this.store = store;
@@ -109,29 +109,29 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "name", nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	@Column(name = "slug", unique = true)
-	public Serializable getSlug() {
+	public String getSlug() {
 		return this.slug;
 	}
 
-	public void setSlug(Serializable slug) {
+	public void setSlug(String slug) {
 		this.slug = slug;
 	}
 
 	@Column(name = "desciption", nullable = false)
-	public Serializable getDesciption() {
+	public String getDesciption() {
 		return this.desciption;
 	}
 
-	public void setDesciption(Serializable desciption) {
+	public void setDesciption(String desciption) {
 		this.desciption = desciption;
 	}
 
@@ -190,11 +190,11 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "listImage")
-	public Serializable getListImage() {
+	public String getListImage() {
 		return this.listImage;
 	}
 
-	public void setListImage(Serializable listImage) {
+	public void setListImage(String listImage) {
 		this.listImage = listImage;
 	}
 
@@ -208,11 +208,11 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "style_valueIds")
-	public Serializable getStyleValueIds() {
+	public String getStyleValueIds() {
 		return this.styleValueIds;
 	}
 
-	public void setStyleValueIds(Serializable styleValueIds) {
+	public void setStyleValueIds(String styleValueIds) {
 		this.styleValueIds = styleValueIds;
 	}
 
