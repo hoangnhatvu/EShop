@@ -354,5 +354,26 @@ public class Users implements Serializable {
 		return store;
 
 	}
+	public UserFollowStore addUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().add(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
 
+	public UserFollowStore removeUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().remove(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
+	public UserFollowProduct addUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().add(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
+
+	public UserFollowProduct removeUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().remove(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
 }

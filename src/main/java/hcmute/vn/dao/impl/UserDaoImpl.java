@@ -5,8 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IUserDao;
-import hcmute.vn.entity.Store;
-import hcmute.vn.entity.Users;
+import hcmute.vn.entity.*;
 
 import java.util.List;
 
@@ -40,6 +39,22 @@ public class UserDaoImpl implements IUserDao {
 
 		}
 
+	}
+
+	public void update(Users user){
+		EntityManager enma = JPAConfig.getEntityManager();
+		EntityTransaction trans = enma.getTransaction();
+		try {
+			trans.begin();
+			enma.merge(user);
+			trans.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			trans.rollback();
+			throw e;
+		}finally {
+			enma.close();
+		}
 	}
 	
 	public Users findByEmail(String email) {

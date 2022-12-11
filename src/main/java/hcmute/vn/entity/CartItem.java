@@ -39,6 +39,12 @@ public class CartItem implements java.io.Serializable {
 		this.count = count;
 	}
 
+	public CartItem(Cart cart, Product product, int count) {
+		this.cart = cart;
+		this.product = product;
+		this.count = count;
+	}
+
 	public CartItem(Cart cart, Product product, Style style, int count, Date createAt, Date updateAt) {
 		this.cart = cart;
 		this.product = product;

@@ -15,6 +15,12 @@ public class ProductDaoImpl implements IProductDao {
         return products;
     }
 
+    public Product findProductById(int prodId) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        Product product = (Product) enma.createQuery("FROM Product P WHERE P.id = :prodId").setParameter("prodId", prodId).getSingleResult();
+        return product;
+    }
+
     @Override
     public List<Product> findAll(int page, int pageSize) {
         EntityManager enma = JPAConfig.getEntityManager();

@@ -28,7 +28,7 @@ public class Style implements java.io.Serializable {
 
 	private Integer id;
 	private Category category;
-	private Serializable name;
+	private String name;
 	private Boolean isDeleted;
 	private Date createAt;
 	private Date updateAt;
@@ -39,11 +39,11 @@ public class Style implements java.io.Serializable {
 	public Style() {
 	}
 
-	public Style(Serializable name) {
+	public Style(String name) {
 		this.name = name;
 	}
 
-	public Style(Category category, Serializable name, Boolean isDeleted, Date createAt, Date updateAt,
+	public Style(Category category, String name, Boolean isDeleted, Date createAt, Date updateAt,
 			Set<OrderItem> orderItems, Set<CartItem> cartItems, Set<StyleValue> styleValues) {
 		this.category = category;
 		this.name = name;
@@ -78,11 +78,11 @@ public class Style implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 

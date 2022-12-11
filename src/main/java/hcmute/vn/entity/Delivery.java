@@ -4,6 +4,7 @@ package hcmute.vn.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,25 +26,25 @@ import javax.persistence.UniqueConstraint;
 public class Delivery implements java.io.Serializable {
 
 	private Integer id;
-	private Serializable name;
-	private Serializable desciption;
+	private String name;
+	private String desciption;
 	private int price;
 	private Boolean isDeleted;
 	private Date createAt;
 	private Date updateAt;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private List<Orders> orderses = null;
 
 	public Delivery() {
 	}
 
-	public Delivery(Serializable name, Serializable desciption, int price) {
+	public Delivery(String name, String desciption, int price) {
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
 	}
 
-	public Delivery(Serializable name, Serializable desciption, int price, Boolean isDeleted, Date createAt,
-			Date updateAt, Set<Orders> orderses) {
+	public Delivery(String name, String desciption, int price, Boolean isDeleted, Date createAt,
+			Date updateAt, List<Orders> orderses) {
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
@@ -66,20 +67,20 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	@Column(name = "desciption", nullable = false)
-	public Serializable getDesciption() {
+	public String getDesciption() {
 		return this.desciption;
 	}
 
-	public void setDesciption(Serializable desciption) {
+	public void setDesciption(String desciption) {
 		this.desciption = desciption;
 	}
 
@@ -122,11 +123,11 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
-	public Set<Orders> getOrderses() {
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 

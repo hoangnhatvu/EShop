@@ -24,4 +24,9 @@ public class ProductServiceImpl implements IProductService {
     public int count() {
         return productDao.count();
     }
+
+    @Override
+    public Product findProductById(int prodId) {
+        return productDao.findProductById(prodId);
+    }
 }

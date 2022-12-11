@@ -63,6 +63,12 @@ public class LoginController extends HttpServlet {
 					
 					response.sendRedirect(request.getContextPath() + "/vendor/store/add");
 				}
+				if(user.getRole() == 1) {
+					HttpSession session=request.getSession();
+					session.setAttribute("userId",user.getId().toString());
+					session.setAttribute("userName",user.getFirstName() + user.getLastName());
+					request.getRequestDispatcher("/views/user/index.jsp").forward(request, response);
+				}
 			}
 
 		} catch (Exception e) {

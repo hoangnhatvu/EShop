@@ -7,6 +7,7 @@
 <link href="${URL}css/headers.css" rel="stylesheet/css">
 
    <header>
+     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <div class="px-3 py-2 text-bg-dark">
       <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -28,7 +29,7 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="<%=request.getContextPath()%>/order" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 Orders
               </a>
@@ -40,9 +41,12 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="<%=request.getContextPath()%>/account" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Customers
+                <c:if test="${empty sessionScope.userId}">
+                  Customer
+                </c:if>
+                ${sessionScope.userName}
               </a>
             </li>
           </ul>
@@ -57,8 +61,10 @@
         </form>
 
         <div class="text-end">
-          <button type="button" class="btn btn-light text-dark me-2">Login</button>
-          <button type="button" class="btn btn-primary">Sign-up</button>
+          <a href="<%=request.getContextPath()%>/userFollow"><button type="button" class="btn btn-primary">Follow</button></a>
+          <a href="<%=request.getContextPath()%>/cart"><button type="button" class="btn btn-primary">Cart</button></a>
+          <a href="<%=request.getContextPath()%>/login"><button type="button" class="btn btn-light text-dark me-2">Login</button></a>
+          <a href="<%=request.getContextPath()%>/sign_up"><button type="button" class="btn btn-primary">Sign-up</button></a>
         </div>
       </div>
     </div>

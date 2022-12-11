@@ -30,11 +30,11 @@ public class UserFollowStore implements java.io.Serializable {
 	public UserFollowStore() {
 	}
 
-	public UserFollowStore(Store store, Users users, Date createAt, Date updateAt) {
+	public UserFollowStore(Store store, Users users) {
 		this.store = store;
 		this.users = users;
-		this.createAt = createAt;
-		this.updateAt = updateAt;
+		this.createAt = new Date();
+		this.updateAt = new Date();
 	}
 
 	@Id

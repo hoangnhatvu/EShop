@@ -3,9 +3,7 @@ package hcmute.vn.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,9 +29,9 @@ public class Orders implements java.io.Serializable {
 	private Delivery delivery;
 	private Store store;
 	private Users users;
-	private Serializable address;
+	private String address;
 	private int phone;
-	private byte status;
+	private String status;
 	private Boolean idPaidBefore;
 	private BigDecimal amountFromUser;
 	private BigDecimal amountFromStore;
@@ -41,13 +39,15 @@ public class Orders implements java.io.Serializable {
 	private BigDecimal amountToGd;
 	private Date createAt;
 	private Date updateAt;
-	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
+	private List<OrderItem> orderItems = new ArrayList<>();
 
 	public Orders() {
+		this.status = "not precessed";
+		this.createAt = new Date();
 	}
 
-	public Orders(Commission commission, Delivery delivery, Store store, Users users, Serializable address, int phone,
-			byte status, BigDecimal amountFromUser, BigDecimal amountFromStore, BigDecimal amountToStore,
+	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
+			String status, BigDecimal amountFromUser, BigDecimal amountFromStore, BigDecimal amountToStore,
 			BigDecimal amountToGd) {
 		this.commission = commission;
 		this.delivery = delivery;
@@ -62,9 +62,20 @@ public class Orders implements java.io.Serializable {
 		this.amountToGd = amountToGd;
 	}
 
-	public Orders(Commission commission, Delivery delivery, Store store, Users users, Serializable address, int phone,
-			byte status, Boolean idPaidBefore, BigDecimal amountFromUser, BigDecimal amountFromStore,
-			BigDecimal amountToStore, BigDecimal amountToGd, Date createAt, Date updateAt, Set<OrderItem> orderItems) {
+	public Orders(Commission commission, Delivery delivery, Users users, String address, int phone, BigDecimal amountFromUser) {
+		this.commission = commission;
+		this.delivery = delivery;
+		this.users = users;
+		this.address = address;
+		this.phone = phone;
+		this.amountFromUser = amountFromUser;
+		this.status = "not precessed";
+		this.createAt = new Date();
+	}
+
+	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
+			String status, Boolean idPaidBefore, BigDecimal amountFromUser, BigDecimal amountFromStore,
+			BigDecimal amountToStore, BigDecimal amountToGd, Date createAt, Date updateAt, List<OrderItem> orderItems) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.store = store;
@@ -79,6 +90,20 @@ public class Orders implements java.io.Serializable {
 		this.amountToGd = amountToGd;
 		this.createAt = createAt;
 		this.updateAt = updateAt;
+		this.orderItems = orderItems;
+	}
+
+	public Orders(Commission commission, Delivery delivery, Users users, String address, int phone,
+				  String status, Boolean idPaidBefore, BigDecimal amountFromUser, List<OrderItem> orderItems) {
+		this.commission = commission;
+		this.delivery = delivery;
+		this.users = users;
+		this.address = address;
+		this.phone = phone;
+		this.status = status;
+		this.idPaidBefore = idPaidBefore;
+		this.amountFromUser = amountFromUser;
+		this.updateAt = new Date();
 		this.orderItems = orderItems;
 	}
 
@@ -135,11 +160,11 @@ public class Orders implements java.io.Serializable {
 	}
 
 	@Column(name = "address", nullable = false)
-	public Serializable getAddress() {
+	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(Serializable address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -153,11 +178,11 @@ public class Orders implements java.io.Serializable {
 	}
 
 	@Column(name = "status", nullable = false)
-	public byte getStatus() {
+	public String getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -227,12 +252,22 @@ public class Orders implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
-	public Set<OrderItem> getOrderItems() {
+	public List<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}
 
-	public void setOrderItems(Set<OrderItem> orderItems) {
+	public void setOrderItems(List<OrderItem> orderItems) {
 		this.orderItems = orderItems;
 	}
 
+	public OrderItem addOrderItem(OrderItem orderItem) {
+		getOrderItems().add(orderItem);
+		orderItem.setOrders(this);
+		return orderItem;
+	}
+	public OrderItem removeOrderItem(OrderItem orderItem) {
+		getOrderItems().remove(orderItem);
+		orderItem.setOrders(null);
+		return orderItem;
+	}
 }

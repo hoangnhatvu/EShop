@@ -25,6 +25,8 @@
         <th>Tên</th>
         <th>Giá</th>
         <th>Giá khuyến mãi</th>
+        <th>Thêm vào giỏ hàng</th>
+        <th>Theo dõi</th>
     </tr>
     </thead>
     <tbody>
@@ -34,6 +36,8 @@
             <td>${prod.name}</td>
             <td>${prod.price}</td>
             <td>${prod.promotionalPrice}</td>
+            <td><a href="<%=request.getContextPath()%>/product/addToCart?productId=${prod.id}">Add</a></td>
+            <td><a href="<%=request.getContextPath()%>/followProduct?productId=${prod.id}">Follow</a></td>
         </tr>
     </c:forEach>
     </tbody>
@@ -51,7 +55,7 @@
         <th>Tên</th>
         <th>Mô tả</th>
         <th>Đánh giá</th>
-        <th>Thêm vào giỏ hàng</th>
+        <th>Theo dõi</th>
     </tr>
     </thead>
     <tbody>
@@ -62,8 +66,7 @@
             <td>${store.name}</td>
             <td>${store.bio}</td>
             <td>${store.rating}</td>
-            <td><a href="/product/addToCart?productId=${store.id}"></a></td>
-
+            <td><a href="<%=request.getContextPath()%>/followStore?storeId=${store.id}">Follow</a></td>
         </tr>
     </c:forEach>
     </tbody>

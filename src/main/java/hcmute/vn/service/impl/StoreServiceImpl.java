@@ -22,6 +22,11 @@ public class StoreServiceImpl implements IStoreService{
 	}
 
 	@Override
+	public Store findStoresById(int id) {
+		return storeDao.findStoresById(id);
+	}
+
+	@Override
 	public List<Store> findAll() {
 		return storeDao.findAll();
 	}

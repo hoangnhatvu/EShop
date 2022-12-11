@@ -56,4 +56,10 @@ public class StoreDaoImpl implements IStoreDao {
 		List<Store> stores = (List<Store>) enma.createQuery("FROM Store S WHERE S.name like :name").setParameter("name", "%" + searchString + "%").getResultList();
 		return stores;
 	}
+
+	public Store findStoresById(int id) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		Store store = (Store) enma.createQuery("FROM Store S WHERE S.id =:id").setParameter("id",id).getSingleResult();
+		return store;
+	}
 }
