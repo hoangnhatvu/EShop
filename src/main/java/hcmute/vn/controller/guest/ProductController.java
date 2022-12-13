@@ -53,15 +53,15 @@ public class ProductController extends HttpServlet {
                 }
                 Cart userCart = cartService.findCartByUserId(userId);
                 Product product = productService.findProductById(prodId);
+                CartItem cartItem = new CartItem(userCart, product, 1);
                 //Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
-                if (!cartItemService.existCartItem(product)) {
-                    CartItem cartItem = new CartItem(userCart, product, 1);
+                if (!cartItemService.existCartItem(cartItem)) {
                     cartItemService.insert(userCart.addCartItem(cartItem));
                 }
                 else{
-                    CartItem cartItem = cartItemService.findByProdId(product);
-                    cartItem.setCount(cartItem.getCount() + 1);
-                    cartItemService.update(cartItem);
+                    CartItem existCartItem = cartItemService.findByProdId(cartItem);
+                    existCartItem.setCount(existCartItem.getCount() + 1);
+                    cartItemService.update(existCartItem);
                 }
             }
         }

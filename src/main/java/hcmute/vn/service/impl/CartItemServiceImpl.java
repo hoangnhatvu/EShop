@@ -21,6 +21,6 @@ public class CartItemServiceImpl implements ICartItemService {
     public CartItem findById(int id){
         return cartItemDao.findById(id);
     }
-    public CartItem findByProdId (Product product) {return cartItemDao.findByProdId(product);}
-    public boolean existCartItem(Product product) { return cartItemDao.existCartItem(product); }
+    public CartItem findByProdId (CartItem cartItem) {return cartItemDao.findByProdId(cartItem);}
+    public boolean existCartItem(CartItem cartItem) { return cartItemDao.existCartItem(cartItem); }
 }

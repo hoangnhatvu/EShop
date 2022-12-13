@@ -8,6 +8,6 @@ public interface ICartItemService {
     public void update(CartItem cartItem);
     public void delete(CartItem cartItem) throws Exception;
     public CartItem findById(int id);
-    public CartItem findByProdId (Product product);
-    public boolean existCartItem(Product product);
+    public CartItem findByProdId (CartItem cartItem);
+    public boolean existCartItem(CartItem cartItem);
 }
