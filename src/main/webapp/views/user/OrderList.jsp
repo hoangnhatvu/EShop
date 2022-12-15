@@ -27,6 +27,7 @@ ${cancelMsg}
     <th>Tổng tiền</th>
     <th>Ngày đặt</th>
     <th></th>
+    <th>review</th>
 
     </thead>
 <c:forEach var="ord" items="${orders}" varStatus="STT">
@@ -45,6 +46,8 @@ ${cancelMsg}
     <th>${ord.amountFromUser}</th>
     <th>${ord.createAt}</th>
     <th><c:if test="${ord.status == 'not precessed'}"><a href="<%=request.getContextPath()%>/order/delete?ordId=${ord.id}">Hủy đơn hàng</a></c:if></th>
+
+    <th><a href="<%=request.getContextPath()%>/order/addReview?ordId=${ord.id}&content=qua tuyet&stars=3">Them danh gia</a></th>
 </tr>
 </c:forEach>
 </table>

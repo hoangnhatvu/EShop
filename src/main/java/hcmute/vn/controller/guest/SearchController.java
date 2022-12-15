@@ -1,12 +1,15 @@
 package hcmute.vn.controller.guest;
 
 import hcmute.vn.entity.Product;
+import hcmute.vn.entity.Review;
 import hcmute.vn.entity.Store;
 import hcmute.vn.entity.Users;
 import hcmute.vn.service.IProductService;
+import hcmute.vn.service.IReviewService;
 import hcmute.vn.service.IStoreService;
 import hcmute.vn.service.IUserService;
 import hcmute.vn.service.impl.ProductServiceImpl;
+import hcmute.vn.service.impl.ReviewServiceImpl;
 import hcmute.vn.service.impl.StoreServiceImpl;
 import hcmute.vn.service.impl.UserServiceImpl;
 
@@ -23,6 +26,7 @@ public class SearchController extends HttpServlet {
     IProductService productService = new ProductServiceImpl();
     IStoreService storeService = new StoreServiceImpl();
     IUserService userService = new UserServiceImpl();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
@@ -38,7 +42,6 @@ public class SearchController extends HttpServlet {
             System.out.println(storeList);
             List<Users> userList = userService.findUsersByName(searchString);
             System.out.println(userList);
-
 
             request.setAttribute("productList", productList);
             request.setAttribute("storeList", storeList);

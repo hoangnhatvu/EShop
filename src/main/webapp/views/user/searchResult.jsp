@@ -27,6 +27,7 @@
         <th>Giá khuyến mãi</th>
         <th>Thêm vào giỏ hàng</th>
         <th>Theo dõi</th>
+        <th>Danh gia</th>
     </tr>
     </thead>
     <tbody>
@@ -38,6 +39,7 @@
             <td>${prod.promotionalPrice}</td>
             <td><a href="<%=request.getContextPath()%>/product/addToCart?productId=${prod.id}">Add</a></td>
             <td><a href="<%=request.getContextPath()%>/followProduct?productId=${prod.id}">Follow</a></td>
+            <td><a href="<%=request.getContextPath()%>/product/review?productId=${prod.id}">${prod.rating}</a></td>
         </tr>
     </c:forEach>
     </tbody>
