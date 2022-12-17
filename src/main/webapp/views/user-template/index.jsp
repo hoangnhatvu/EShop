@@ -6,16 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
- <!-- Head Start -->
-<jsp:include page="header.jsp"/>
- <jsp:include page="head/topBar.jsp"/>
- <div class="container-fluid mb-5">
-  <div class="row border-top px-xl-5">
-   <jsp:include page="head/categoryList.jsp"/>
-   <div class="col-lg-9">
-    <jsp:include page="head/navMember.jsp"/>
+
 
     <jsp:include page="head/slider.jsp"/>
    </div>
@@ -36,11 +27,6 @@
 
  <!-- Body End -->
 
- <!-- Footer Start -->
 
-<jsp:include page="footer.jsp"/>
 
- <!-- Footer End -->
-
-</html>
 

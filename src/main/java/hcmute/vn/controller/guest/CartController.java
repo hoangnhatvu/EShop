@@ -102,10 +102,8 @@ public class CartController extends HttpServlet {
                     cartItemService.delete(cartItem);
                 }
 
-                //Thêm order vào db
                 request.setAttribute("orderMsg", "Đặt hàng thành công");
 
-                //Xóa cart của user
             }
         }catch (Exception e){
             e.printStackTrace();

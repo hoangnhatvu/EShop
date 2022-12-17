@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ICategoryService {
     public List<Category> findAll();
+    public int countProdByCateId(int cateId);
+
 }

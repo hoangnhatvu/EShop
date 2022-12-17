@@ -2,9 +2,7 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,22 +26,24 @@ public class Category implements java.io.Serializable {
 
 	private Integer id;
 	private Category category;
-	private Serializable name;
-	private Serializable image;
+	private String name;
+	private String image;
 	private Boolean isDeleted;
 	private Date createAt;
 	private Date updateAt;
 	private Set<Category> categories = new HashSet<Category>(0);
 	private Set<Style> styles = new HashSet<Style>(0);
 
+
+
 	public Category() {
 	}
 
-	public Category(Serializable name) {
+	public Category(String name) {
 		this.name = name;
 	}
 
-	public Category(Category category, Serializable name, Serializable image, Boolean isDeleted, Date createAt,
+	public Category(Category category, String name, String image, Boolean isDeleted, Date createAt,
 			Date updateAt, Set<Category> categories, Set<Style> styles) {
 		this.category = category;
 		this.name = name;
@@ -78,20 +78,20 @@ public class Category implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	@Column(name = "image")
-	public Serializable getImage() {
+	public String getImage() {
 		return this.image;
 	}
 
-	public void setImage(Serializable image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
@@ -141,5 +141,6 @@ public class Category implements java.io.Serializable {
 	public void setStyles(Set<Style> styles) {
 		this.styles = styles;
 	}
+
 
 }

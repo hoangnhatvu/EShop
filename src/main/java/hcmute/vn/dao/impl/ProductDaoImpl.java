@@ -11,13 +11,13 @@ public class ProductDaoImpl implements IProductDao {
     @Override
     public List<Product> findProductByName(String searchString) {
         EntityManager enma = JPAConfig.getEntityManager();
-        List<Product> products = (List<Product>) enma.createQuery("FROM Product P WHERE P.name like :name").setParameter("name", "%" + searchString + "%").getResultList();
+        List<Product> products = (List<Product>) enma.createQuery("FROM Product P WHERE P.name like :name and P.isSelling = true").setParameter("name", "%" + searchString + "%").getResultList();
         return products;
     }
 
     public Product findProductById(int prodId) {
         EntityManager enma = JPAConfig.getEntityManager();
-        Product product = (Product) enma.createQuery("FROM Product P WHERE P.id = :prodId").setParameter("prodId", prodId).getSingleResult();
+        Product product = (Product) enma.createQuery("FROM Product P WHERE P.id = :prodId and P.isSelling = true").setParameter("prodId", prodId).getSingleResult();
         return product;
     }
 
@@ -29,9 +29,23 @@ public class ProductDaoImpl implements IProductDao {
     }
 
     @Override
+    public List<Product> findTrendyProd() {
+        EntityManager enma = JPAConfig.getEntityManager();
+        List<Product> products = (List<Product>) enma.createQuery("FROM Product P WHERE P.isSelling = true ORDER BY P.rating").setMaxResults(10).getResultList();
+        return products;
+    }
+
+    @Override
+    public List<Product> findArrivalProd() {
+        EntityManager enma = JPAConfig.getEntityManager();
+        List<Product> products = (List<Product>) enma.createQuery("FROM Product P WHERE P.isSelling = true ORDER BY P.createAt").setMaxResults(10).getResultList();
+        return products;
+    }
+
+    @Override
     public int count() {
         EntityManager enma = JPAConfig.getEntityManager();
-        int count = ((Long) enma.createQuery("SELECT count(P) FROM Product P").getSingleResult()).intValue();
+        int count = ((Long) enma.createQuery("SELECT count(P) FROM Product P WHERE P.isSelling = true").getSingleResult()).intValue();
         return count;
     }
 }

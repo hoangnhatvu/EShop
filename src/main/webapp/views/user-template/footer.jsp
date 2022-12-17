@@ -68,7 +68,7 @@
       </p>
     </div>
     <div class="col-md-6 px-xl-0 text-center text-md-right">
-      <img class="img-fluid" src="../../templates/img/payments.png" alt="">
+      <img class="img-fluid" src="templates/img/payments.png" alt="">
     </div>
   </div>
 </div>
@@ -82,14 +82,14 @@
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-<script src="../../templates/lib/easing/easing.min.js"></script>
-<script src="../../templates/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="templates/lib/easing/easing.min.js"></script>
+<script src="templates/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Contact Javascript File -->
-<script src="../../templates/mail/jqBootstrapValidation.min.js"></script>
-<script src="../../templates/mail/contact.js"></script>
+<script src="templates/mail/jqBootstrapValidation.min.js"></script>
+<script src="templates/mail/contact.js"></script>
 
 <!-- Template Javascript -->
-<script src="../../templates/js/main.js"></script>
+<script src="templates/js/main.js"></script>
 </body>
 

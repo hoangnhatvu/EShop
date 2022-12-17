@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ICategoryDao {
     public List<Category> findAll();
+    public int countProdByCateId(int cateId);
 }

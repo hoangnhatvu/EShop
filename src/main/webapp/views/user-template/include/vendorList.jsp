@@ -11,7 +11,7 @@
     <div class="col">
       <div class="owl-carousel vendor-carousel">
         <div class="vendor-item border p-4">
-          <img src="../../../templates/img/vendor-1.jpg" alt="">
+          <img src="templates/img/vendor-1.jpg" alt="">
         </div>
 
       </div>

@@ -44,23 +44,28 @@
       </a>
     </div>
     <div class="col-lg-6 col-6 text-left">
-      <form action="">
+      <form action="<%=request.getContextPath()%>/search" method="post" role="search">
         <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for products">
+          <input type="search" name="searchString" class="form-control" placeholder="Search for products">
           <div class="input-group-append">
-                            <span class="input-group-text bg-transparent text-primary">
+                            <button type="submit" class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>
-                            </span>
+                            </button>
           </div>
         </div>
       </form>
     </div>
+
     <div class="col-lg-3 col-6 text-right">
-      <a href="" class="btn border">
+      <a href="<%=request.getContextPath()%>/order" class="btn border">
+        <i class="fa fa-box-open text-primary"></i>
+        <span class="badge">0</span>
+      </a>
+      <a href="<%=request.getContextPath()%>/userFollow" class="btn border">
         <i class="fa fa-heart text-primary"></i>
         <span class="badge">0</span>
       </a>
-      <a href="" class="btn border">
+      <a href="<%=request.getContextPath()%>/cart" class="btn border">
         <i class="fa fa-shopping-cart text-primary"></i>
         <span class="badge">0</span>
       </a>

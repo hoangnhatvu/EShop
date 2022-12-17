@@ -34,14 +34,10 @@ public class SearchController extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
 
             String searchString = request.getParameter("searchString");
-            System.out.println(searchString);
 
             List<Product> productList = productService.findProductByName(searchString);
-            System.out.println(productList);
             List<Store> storeList = storeService.findStoresByName(searchString);
-            System.out.println(storeList);
             List<Users> userList = userService.findUsersByName(searchString);
-            System.out.println(userList);
 
             request.setAttribute("productList", productList);
             request.setAttribute("storeList", storeList);
