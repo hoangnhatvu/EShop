@@ -20,4 +20,19 @@ public class StoreServiceImpl implements IStoreService{
 	public List<Store> findAll() {
 		return storeDao.findAll();
 	}
+	@Override
+	public Store findbyId(int storeId)
+	{
+		return storeDao.findById(storeId);
+	}
+	@Override
+	public void update(Store store)
+	{
+		storeDao.update(store);
+	}
+	@Override
+	public void delete(int storeId) throws Exception
+	{
+		storeDao.delete(storeId);
+	}
 }

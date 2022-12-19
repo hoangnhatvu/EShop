@@ -13,6 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,26 +25,50 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Category", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
 public class Category implements java.io.Serializable {
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
 	private Category category;
-	private Serializable name;
-	private Serializable image;
+
+	@Column(name = "name", unique = true, nullable = false)
+	private String name;
+
+	@Column(name = "image")
+	private String image;
+
+	@Column(name = "is_deleted")
 	private Boolean isDeleted;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private Set<Category> categories = new HashSet<Category>(0);
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private Set<Style> styles = new HashSet<Style>(0);
 
 	public Category() {
 	}
 
-	public Category(Serializable name) {
+	public Category(String name) {
 		this.name = name;
 	}
 
-	public Category(Category category, Serializable name, Serializable image, Boolean isDeleted, Date createAt,
+	public Category(Category category, String name, String image, Boolean isDeleted, Date createAt,
 			Date updateAt, Set<Category> categories, Set<Style> styles) {
 		this.category = category;
 		this.name = name;
@@ -55,10 +80,6 @@ public class Category implements java.io.Serializable {
 		this.styles = styles;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -67,8 +88,6 @@ public class Category implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
 	public Category getCategory() {
 		return this.category;
 	}
@@ -77,25 +96,22 @@ public class Category implements java.io.Serializable {
 		this.category = category;
 	}
 
-	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "image")
-	public Serializable getImage() {
+	public String getImage() {
 		return this.image;
 	}
 
-	public void setImage(Serializable image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 
-	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -104,8 +120,6 @@ public class Category implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -114,8 +128,6 @@ public class Category implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -124,7 +136,6 @@ public class Category implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Category> getCategories() {
 		return this.categories;
 	}
@@ -133,7 +144,6 @@ public class Category implements java.io.Serializable {
 		this.categories = categories;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Style> getStyles() {
 		return this.styles;
 	}

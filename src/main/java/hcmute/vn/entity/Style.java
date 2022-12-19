@@ -13,6 +13,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,26 +25,45 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Style", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Style.findAll", query = "SELECT s FROM Style s")
+
 public class Style implements java.io.Serializable {
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_ids")
 	private Category category;
-	private Serializable name;
+	@Column(name = "name", unique = true, nullable = false)
+
+	private String name;
+	@Column(name = "is_deleted")
+
 	private Boolean isDeleted;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	private Set<CartItem> cartItems = new HashSet<CartItem>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	private Set<StyleValue> styleValues = new HashSet<StyleValue>(0);
 
 	public Style() {
 	}
 
-	public Style(Serializable name) {
+	public Style(String name) {
 		this.name = name;
 	}
 
-	public Style(Category category, Serializable name, Boolean isDeleted, Date createAt, Date updateAt,
+	public Style(Category category, String name, Boolean isDeleted, Date createAt, Date updateAt,
 			Set<OrderItem> orderItems, Set<CartItem> cartItems, Set<StyleValue> styleValues) {
 		this.category = category;
 		this.name = name;
@@ -55,10 +75,6 @@ public class Style implements java.io.Serializable {
 		this.styleValues = styleValues;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -67,8 +83,7 @@ public class Style implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_ids")
+	
 	public Category getCategory() {
 		return this.category;
 	}
@@ -77,16 +92,14 @@ public class Style implements java.io.Serializable {
 		this.category = category;
 	}
 
-	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -95,8 +108,7 @@ public class Style implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
+
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -105,8 +117,7 @@ public class Style implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
+	
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -115,7 +126,6 @@ public class Style implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	public Set<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}
@@ -124,7 +134,6 @@ public class Style implements java.io.Serializable {
 		this.orderItems = orderItems;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	public Set<CartItem> getCartItems() {
 		return this.cartItems;
 	}
@@ -133,7 +142,6 @@ public class Style implements java.io.Serializable {
 		this.cartItems = cartItems;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "style")
 	public Set<StyleValue> getStyleValues() {
 		return this.styleValues;
 	}

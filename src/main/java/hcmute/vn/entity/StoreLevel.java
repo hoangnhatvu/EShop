@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -22,28 +23,50 @@ import org.hibernate.annotations.Parameter;
  */
 @Entity
 @Table(name = "StoreLevel", schema = "dbo", catalog = "EShop")
-public class StoreLevel implements java.io.Serializable {
+@NamedQuery(name = "StoreLevel.findAll", query = "SELECT s FROM StoreLevel s")
 
-	private Integer id;
+public class StoreLevel implements java.io.Serializable {
+	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "store"))
+	@Id
+	@GeneratedValue(generator = "generator")
+
+	@Column(name = "id", unique = true, nullable = false)
+	private int id;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
 	private Store store;
-	private Serializable name;
+	
+	@Column(name = "name", nullable = false)
+	private String name;
+	
+	@Column(name = "minPoint", nullable = false)
 	private int minPoint;
-	private BigDecimal discount;
+	
+	@Column(name = "discount", nullable = false, precision = 10)
+	private int discount;
+	
+	@Column(name = "is_delete")
 	private Boolean isDelete;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
 
 	public StoreLevel() {
 	}
 
-	public StoreLevel(Store store, Serializable name, int minPoint, BigDecimal discount) {
+	public StoreLevel(Store store, String name, int minPoint, int discount) {
 		this.store = store;
 		this.name = name;
 		this.minPoint = minPoint;
 		this.discount = discount;
 	}
 
-	public StoreLevel(Store store, Serializable name, int minPoint, BigDecimal discount, Boolean isDelete,
+	public StoreLevel(Store store, String name, int minPoint, int discount, Boolean isDelete,
 			Date createAt, Date updateAt) {
 		this.store = store;
 		this.name = name;
@@ -54,39 +77,32 @@ public class StoreLevel implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "store"))
-	@Id
-	@GeneratedValue(generator = "generator")
-
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
+	
 	public Store getStore() {
 		return this.store;
 	}
 
 	public void setStore(Store store) {
 		this.store = store;
+		this.id = store.getId();
 	}
 
-	@Column(name = "name", nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "minPoint", nullable = false)
 	public int getMinPoint() {
 		return this.minPoint;
 	}
@@ -95,16 +111,14 @@ public class StoreLevel implements java.io.Serializable {
 		this.minPoint = minPoint;
 	}
 
-	@Column(name = "discount", nullable = false, precision = 10)
-	public BigDecimal getDiscount() {
+	public int getDiscount() {
 		return this.discount;
 	}
 
-	public void setDiscount(BigDecimal discount) {
+	public void setDiscount(int discount) {
 		this.discount = discount;
 	}
 
-	@Column(name = "is_delete")
 	public Boolean getIsDelete() {
 		return this.isDelete;
 	}
@@ -113,8 +127,7 @@ public class StoreLevel implements java.io.Serializable {
 		this.isDelete = isDelete;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
+	
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -123,8 +136,7 @@ public class StoreLevel implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
+	
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}

@@ -1,5 +1,7 @@
 package hcmute.vn.service.impl;
 
+import java.util.List;
+
 import hcmute.vn.dao.IUserDao;
 import hcmute.vn.dao.impl.UserDaoImpl;
 import hcmute.vn.entity.Users;
@@ -22,4 +24,29 @@ public class UserServiceImpl implements IUserService{
 	public Users findById(int userid) {
 		return userDao.findById(userid);
 	}
+	
+	@Override
+	public List<Users> findAll()
+	{
+		return userDao.findAll();
+	}
+	
+	@Override
+	public void update(Users user)
+	{
+		 userDao.update(user);
+	}
+	
+	@Override
+	public void insert(Users user)
+	{
+		userDao.update(user);
+	}
+	
+	@Override
+	public void delete(int userId) throws Exception
+	{
+		userDao.delete(userId);
+	}
+	
 }

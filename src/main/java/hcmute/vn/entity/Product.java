@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,33 +26,79 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Product", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "slug"))
+@NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p")
 public class Product implements java.io.Serializable {
 
-	private Integer id;
+	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+	@Column(name = "id", unique = true, nullable = false)
+	private int id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "storeId")
 	private Store store;
-	private Serializable name;
-	private Serializable slug;
-	private Serializable desciption;
-	private BigDecimal price;
-	private BigDecimal promotionalPrice;
+	
+	@Column(name = "name", nullable = false)
+	private String name;
+	
+	@Column(name = "slug", unique = false)
+	private String slug;
+	
+	@Column(name = "desciption", nullable = true)
+	private String desciption;
+	
+	@Column(name = "price", nullable = false, precision = 10)
+	private int price;
+	
+	@Column(name = "promotionalPrice", nullable = false, precision = 10)
+	private int promotionalPrice;
+	
+	@Column(name = "quantity", nullable = false)
 	private int quantity;
+	
+	@Column(name = "slod")
 	private Integer slod;
+	
+	@Column(name = "is_active")
 	private Boolean isActive;
+	
+	@Column(name = "is_selling")
 	private Boolean isSelling;
-	private Serializable listImage;
+	
+	@Column(name = "listImage")
+	private String listImage;
+	
+	@Column(name = "categoryId")
 	private Integer categoryId;
-	private Serializable styleValueIds;
-	private Integer rating;
+	
+	@Column(name = "style_valueIds")
+	private String styleValueIds;
+	
+	@Column(name = "rating")
+	private int rating;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private Set<UserFollowProduct> userFollowProducts = new HashSet<UserFollowProduct>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private Set<CartItem> cartItems = new HashSet<CartItem>(0);
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 
 	public Product() {
+		
 	}
+	
 
-	public Product(Serializable name, Serializable desciption, BigDecimal price, BigDecimal promotionalPrice,
+	public Product(String name, String desciption, int price, int promotionalPrice,
 			int quantity) {
 		this.name = name;
 		this.desciption = desciption;
@@ -60,9 +107,9 @@ public class Product implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	public Product(Store store, Serializable name, Serializable slug, Serializable desciption, BigDecimal price,
-			BigDecimal promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
-			Serializable listImage, Integer categoryId, Serializable styleValueIds, Integer rating, Date createAt,
+	public Product(Store store, String name, String slug, String desciption, int price,
+			int promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
+			String listImage, Integer categoryId, String styleValueIds, Integer rating, Date createAt,
 			Date updateAt, Set<UserFollowProduct> userFollowProducts, Set<CartItem> cartItems,
 			Set<OrderItem> orderItems) {
 		this.store = store;
@@ -86,10 +133,7 @@ public class Product implements java.io.Serializable {
 		this.orderItems = orderItems;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
+	
 	public Integer getId() {
 		return this.id;
 	}
@@ -98,8 +142,7 @@ public class Product implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "storeId")
+	
 	public Store getStore() {
 		return this.store;
 	}
@@ -108,52 +151,47 @@ public class Product implements java.io.Serializable {
 		this.store = store;
 	}
 
-	@Column(name = "name", nullable = false)
-	public Serializable getName() {
+	
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "slug", unique = true)
-	public Serializable getSlug() {
+	public String getSlug() {
 		return this.slug;
 	}
 
-	public void setSlug(Serializable slug) {
+	public void setSlug(String slug) {
 		this.slug = slug;
 	}
 
-	@Column(name = "desciption", nullable = false)
-	public Serializable getDesciption() {
+	public String getDesciption() {
 		return this.desciption;
 	}
 
-	public void setDesciption(Serializable desciption) {
+	public void setDesciption(String desciption) {
 		this.desciption = desciption;
 	}
 
-	@Column(name = "price", nullable = false, precision = 10)
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	@Column(name = "promotionalPrice", nullable = false, precision = 10)
-	public BigDecimal getPromotionalPrice() {
+	public int getPromotionalPrice() {
 		return this.promotionalPrice;
 	}
 
-	public void setPromotionalPrice(BigDecimal promotionalPrice) {
+	public void setPromotionalPrice(int promotionalPrice) {
 		this.promotionalPrice = promotionalPrice;
 	}
 
-	@Column(name = "quantity", nullable = false)
 	public int getQuantity() {
 		return this.quantity;
 	}
@@ -162,7 +200,6 @@ public class Product implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	@Column(name = "slod")
 	public Integer getSlod() {
 		return this.slod;
 	}
@@ -171,7 +208,6 @@ public class Product implements java.io.Serializable {
 		this.slod = slod;
 	}
 
-	@Column(name = "is_active")
 	public Boolean getIsActive() {
 		return this.isActive;
 	}
@@ -180,7 +216,6 @@ public class Product implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@Column(name = "is_selling")
 	public Boolean getIsSelling() {
 		return this.isSelling;
 	}
@@ -189,16 +224,14 @@ public class Product implements java.io.Serializable {
 		this.isSelling = isSelling;
 	}
 
-	@Column(name = "listImage")
-	public Serializable getListImage() {
+	public String getListImage() {
 		return this.listImage;
 	}
 
-	public void setListImage(Serializable listImage) {
+	public void setListImage(String listImage) {
 		this.listImage = listImage;
 	}
 
-	@Column(name = "categoryId")
 	public Integer getCategoryId() {
 		return this.categoryId;
 	}
@@ -207,16 +240,14 @@ public class Product implements java.io.Serializable {
 		this.categoryId = categoryId;
 	}
 
-	@Column(name = "style_valueIds")
-	public Serializable getStyleValueIds() {
+	public String getStyleValueIds() {
 		return this.styleValueIds;
 	}
 
-	public void setStyleValueIds(Serializable styleValueIds) {
+	public void setStyleValueIds(String styleValueIds) {
 		this.styleValueIds = styleValueIds;
 	}
 
-	@Column(name = "rating")
 	public Integer getRating() {
 		return this.rating;
 	}
@@ -225,8 +256,7 @@ public class Product implements java.io.Serializable {
 		this.rating = rating;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
+	
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -235,8 +265,7 @@ public class Product implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
+	
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -245,7 +274,7 @@ public class Product implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+	
 	public Set<UserFollowProduct> getUserFollowProducts() {
 		return this.userFollowProducts;
 	}
@@ -254,7 +283,6 @@ public class Product implements java.io.Serializable {
 		this.userFollowProducts = userFollowProducts;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	public Set<CartItem> getCartItems() {
 		return this.cartItems;
 	}
@@ -263,7 +291,6 @@ public class Product implements java.io.Serializable {
 		this.cartItems = cartItems;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	public Set<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}

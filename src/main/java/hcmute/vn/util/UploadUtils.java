@@ -31,7 +31,7 @@ public class UploadUtils {
 
 		if (storeFolder == null) {
 
-			storeFolder = "E:\\uploads1";
+			storeFolder = "D:\\uploads1";
 
 		}
 

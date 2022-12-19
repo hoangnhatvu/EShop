@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,27 +23,46 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Delivery", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
 public class Delivery implements java.io.Serializable {
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	private Serializable name;
-	private Serializable desciption;
+
+	@Column(name = "name", unique = true, nullable = false)
+
+	private String name;
+	@Column(name = "desciption", nullable = false)
+
+	private String desciption;
+	@Column(name = "price", nullable = false)
+
 	private int price;
+	@Column(name = "is_deleted")
+
 	private Boolean isDeleted;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
+
 	private Set<Orders> orderses = new HashSet<Orders>(0);
 
 	public Delivery() {
 	}
 
-	public Delivery(Serializable name, Serializable desciption, int price) {
+	public Delivery(String name, String desciption, int price) {
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
 	}
 
-	public Delivery(Serializable name, Serializable desciption, int price, Boolean isDeleted, Date createAt,
+	public Delivery(String name, String desciption, int price, Boolean isDeleted, Date createAt,
 			Date updateAt, Set<Orders> orderses) {
 		this.name = name;
 		this.desciption = desciption;
@@ -53,10 +73,6 @@ public class Delivery implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -65,25 +81,22 @@ public class Delivery implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "desciption", nullable = false)
-	public Serializable getDesciption() {
+	public String getDesciption() {
 		return this.desciption;
 	}
 
-	public void setDesciption(Serializable desciption) {
+	public void setDesciption(String desciption) {
 		this.desciption = desciption;
 	}
 
-	@Column(name = "price", nullable = false)
 	public int getPrice() {
 		return this.price;
 	}
@@ -92,7 +105,6 @@ public class Delivery implements java.io.Serializable {
 		this.price = price;
 	}
 
-	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -101,8 +113,6 @@ public class Delivery implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -111,8 +121,6 @@ public class Delivery implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -121,7 +129,6 @@ public class Delivery implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
 	public Set<Orders> getOrderses() {
 		return this.orderses;
 	}

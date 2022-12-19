@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,31 +25,57 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "Orders", schema = "dbo", catalog = "EShop")
+@NamedQuery(name = "Orders.findAll", query = "SELECT d FROM Orders d")
 public class Orders implements java.io.Serializable {
 
-	private Integer id;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
+	private int id;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "commission_id", nullable = false)
 	private Commission commission;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "delivere_id", nullable = false)
 	private Delivery delivery;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "store_id", nullable = false)
 	private Store store;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = false)
 	private Users users;
-	private Serializable address;
+	@Column(name = "address", nullable = false)
+	private String address;
+	@Column(name = "phone", nullable = false)
 	private int phone;
-	private byte status;
+	@Column(name = "status", nullable = false)
+	private int status;
+	@Column(name = "id_paidBefore")
 	private Boolean idPaidBefore;
-	private BigDecimal amountFromUser;
-	private BigDecimal amountFromStore;
-	private BigDecimal amountToStore;
-	private BigDecimal amountToGd;
+	@Column(name = "amountFromUser", nullable = false, precision = 5)
+	private int amountFromUser;
+	@Column(name = "amountFromStore", nullable = false, precision = 5)
+	private int amountFromStore;
+	@Column(name = "amountToStore", nullable = false, precision = 5)
+	private int amountToStore;
+	@Column(name = "amountToGD", nullable = false, precision = 5)
+	private int amountToGd;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
 	private Set<OrderItem> orderItems = new HashSet<OrderItem>(0);
 
 	public Orders() {
 	}
 
-	public Orders(Commission commission, Delivery delivery, Store store, Users users, Serializable address, int phone,
-			byte status, BigDecimal amountFromUser, BigDecimal amountFromStore, BigDecimal amountToStore,
-			BigDecimal amountToGd) {
+	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
+			int status, int amountFromUser, int amountFromStore, int amountToStore,
+			int amountToGd) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.store = store;
@@ -62,9 +89,9 @@ public class Orders implements java.io.Serializable {
 		this.amountToGd = amountToGd;
 	}
 
-	public Orders(Commission commission, Delivery delivery, Store store, Users users, Serializable address, int phone,
-			byte status, Boolean idPaidBefore, BigDecimal amountFromUser, BigDecimal amountFromStore,
-			BigDecimal amountToStore, BigDecimal amountToGd, Date createAt, Date updateAt, Set<OrderItem> orderItems) {
+	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
+			int status, Boolean idPaidBefore, int amountFromUser, int amountFromStore,
+			int amountToStore, int amountToGd, Date createAt, Date updateAt, Set<OrderItem> orderItems) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.store = store;
@@ -82,20 +109,14 @@ public class Orders implements java.io.Serializable {
 		this.orderItems = orderItems;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "commission_id", nullable = false)
 	public Commission getCommission() {
 		return this.commission;
 	}
@@ -104,8 +125,6 @@ public class Orders implements java.io.Serializable {
 		this.commission = commission;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "delivere_id", nullable = false)
 	public Delivery getDelivery() {
 		return this.delivery;
 	}
@@ -114,8 +133,6 @@ public class Orders implements java.io.Serializable {
 		this.delivery = delivery;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id", nullable = false)
 	public Store getStore() {
 		return this.store;
 	}
@@ -124,8 +141,6 @@ public class Orders implements java.io.Serializable {
 		this.store = store;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", nullable = false)
 	public Users getUsers() {
 		return this.users;
 	}
@@ -134,16 +149,14 @@ public class Orders implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "address", nullable = false)
-	public Serializable getAddress() {
+	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(Serializable address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
-	@Column(name = "phone", nullable = false)
 	public int getPhone() {
 		return this.phone;
 	}
@@ -152,16 +165,14 @@ public class Orders implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	@Column(name = "status", nullable = false)
-	public byte getStatus() {
+	public int getStatus() {
 		return this.status;
 	}
 
-	public void setStatus(byte status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
-	@Column(name = "id_paidBefore")
 	public Boolean getIdPaidBefore() {
 		return this.idPaidBefore;
 	}
@@ -170,44 +181,38 @@ public class Orders implements java.io.Serializable {
 		this.idPaidBefore = idPaidBefore;
 	}
 
-	@Column(name = "amountFromUser", nullable = false, precision = 5)
-	public BigDecimal getAmountFromUser() {
+	public int getAmountFromUser() {
 		return this.amountFromUser;
 	}
 
-	public void setAmountFromUser(BigDecimal amountFromUser) {
+	public void setAmountFromUser(int amountFromUser) {
 		this.amountFromUser = amountFromUser;
 	}
 
-	@Column(name = "amountFromStore", nullable = false, precision = 5)
-	public BigDecimal getAmountFromStore() {
+	public int getAmountFromStore() {
 		return this.amountFromStore;
 	}
 
-	public void setAmountFromStore(BigDecimal amountFromStore) {
+	public void setAmountFromStore(int amountFromStore) {
 		this.amountFromStore = amountFromStore;
 	}
 
-	@Column(name = "amountToStore", nullable = false, precision = 5)
-	public BigDecimal getAmountToStore() {
+	public int getAmountToStore() {
 		return this.amountToStore;
 	}
 
-	public void setAmountToStore(BigDecimal amountToStore) {
+	public void setAmountToStore(int amountToStore) {
 		this.amountToStore = amountToStore;
 	}
 
-	@Column(name = "amountToGD", nullable = false, precision = 5)
-	public BigDecimal getAmountToGd() {
+	public int getAmountToGd() {
 		return this.amountToGd;
 	}
 
-	public void setAmountToGd(BigDecimal amountToGd) {
+	public void setAmountToGd(int amountToGd) {
 		this.amountToGd = amountToGd;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -216,8 +221,6 @@ public class Orders implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -226,7 +229,7 @@ public class Orders implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "orders")
+	
 	public Set<OrderItem> getOrderItems() {
 		return this.orderItems;
 	}
