@@ -12,9 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = {"/product", "/product/addToCart", "/product/review"})
+@WebServlet(urlPatterns = {"/product", "/product/detail", "/product/addToCart", "/product/review", "/product/addRview"})
 public class ProductController extends HttpServlet {
     IProductService productService = new ProductServiceImpl();
     ICategoryService categoryService = new CategoryServiceImpl();
@@ -30,12 +31,60 @@ public class ProductController extends HttpServlet {
             addToCart(request, response);
         } else if (url.contains("review")){
             findProductReview(request, response);
+        } else if (url.contains("detail")){
+            productDetail(request, response);
         }
         else {
             findAll(request, response);
-            request.getRequestDispatcher("/views/user/product.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/user-template/bodyContent/product.jsp").forward(request,response);
         }
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String url = request.getRequestURL().toString();
+        if (url.contains("addRview")) {
+            addReview(request, response);
+        }
+    }
+
+    private void addReview(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            HttpSession session = request.getSession(true);
+            if (session.getAttribute("userId") == null && !response.isCommitted()) {
+                response.sendRedirect(request.getContextPath() + "/login");
+            }
+            else {
+                int userId = Integer.parseInt((String) session.getAttribute("userId"));
+                Users users = userService.findById(userId);
+                int prodId = Integer.parseInt(request.getParameter("prodId"));
+                Product product = productService.findProductById(prodId);
+                String content = request.getParameter("content");
+                Review review = new Review(users, product, product.getStore(), content);
+                reviewService.insert(review);
+                response.sendRedirect(request.getContextPath()+"/product/detail?productId="+prodId);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+            request.setAttribute("msg", "Eror: " + e.getMessage());
+        }
+    }
+
+    private void productDetail(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            int prodId = Integer.parseInt(request.getParameter("productId"));
+            Product product = productService.findProductById(prodId);
+            List<Product> relatedProduct = productService.findRelatedProd(product);
+            List<Review> reviews = reviewService.findReviewsByProdId(prodId);
+            request.setAttribute("product", product);
+            request.setAttribute("relatedProduct", relatedProduct);
+            request.setAttribute("reviews", reviews);
+            request.setAttribute("store", product.getStore());
+            request.getRequestDispatcher("/views/user-template/bodyContent/productDetail.jsp").forward(request, response);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void findProductReview(HttpServletRequest request, HttpServletResponse response) {
@@ -92,14 +141,22 @@ public class ProductController extends HttpServlet {
                 indexPage = "1";
             }
             int indexp= Integer.parseInt(indexPage);
-            int countP = productService.count();
-            int endPage = countP/6;
-            if(countP % 6 !=0) {
+
+            int countP = 0;
+            List<Product> products;
+            if (request.getParameter("cateId") == null){
+                 products = productService.findAll(indexp-1, 12);
+                 countP = productService.count();
+            }
+            else{
+                int cateId = Integer.valueOf(request.getParameter("cateId"));
+                products = productService.findProductByCateId(cateId,indexp-1, 12);
+                countP = productService.count(cateId);
+            }
+            int endPage = countP/12;
+            if(countP % 12 !=0) {
                 endPage ++;
             }
-            List<Product> products =
-                    productService.findAll(indexp-1, 6);
-            System.out.println(products);
             request.setAttribute("products", products);
             request.setAttribute("countAll", countP);
 

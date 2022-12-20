@@ -11,7 +11,7 @@ public class CategoryDaoImpl implements ICategoryDao {
     @Override
     public List<Category> findAll() {
         EntityManager enma = JPAConfig.getEntityManager();
-        List<Category> categories = (List<Category>) enma.createQuery("FROM Category C").getResultList();
+        List<Category> categories = (List<Category>) enma.createQuery("FROM Category C").setMaxResults(10).getResultList();
         return categories;
     }
 

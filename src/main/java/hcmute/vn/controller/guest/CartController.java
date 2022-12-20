@@ -3,9 +3,7 @@ package hcmute.vn.controller.guest;
 import hcmute.vn.entity.*;
 import hcmute.vn.service.*;
 import hcmute.vn.service.impl.*;
-import org.apache.commons.beanutils.BeanUtils;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +20,7 @@ public class CartController extends HttpServlet {
     ICartService cartService = new CartServiceImpl();
     ICartItemService cartItemService = new CartItemServiceImpl();
     IOrderService orderService = new OrderServiceImpl();
-    IOrderItemService orderItemService = new IOrderItemServiceImpl();
+    IOrderItemService orderItemService = new OrderItemServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURL().toString();
@@ -30,14 +28,16 @@ public class CartController extends HttpServlet {
             deleteCartItem(request, response);
             findAll(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/cart.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/cart.jsp").forward(request, response);
             }
         } else if (url.contains("checkout")) {
             getCheckout(request, response);
+        } else if (url.contains("updateQuantity")) {
+            updateQuantity(request, response);
         } else {
             findAll(request, response);
             if (!response.isCommitted()){
-                request.getRequestDispatcher("/views/user/cart.jsp").forward(request,response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/cart.jsp").forward(request,response);
             }
         }
     }
@@ -50,7 +50,7 @@ public class CartController extends HttpServlet {
         } else if (url.contains("checkout")) {
             postCheckout(request, response);
             findAllOrder(request, response);
-            request.getRequestDispatcher("/views/user/OrderList.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/user-template/bodyContent/OrderList.jsp").forward(request,response);
         }
     }
 
@@ -61,7 +61,7 @@ public class CartController extends HttpServlet {
             List<Delivery> deliveries = orderService.findDelivery();
             request.setAttribute("commissions", commissions);
             request.setAttribute("deliveries", deliveries);
-            request.getRequestDispatcher("/views/user/checkout.jsp").forward(request,response);
+            request.getRequestDispatcher("/views/user-template/bodyContent/checkout.jsp").forward(request,response);
         } catch (ServletException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
@@ -79,17 +79,20 @@ public class CartController extends HttpServlet {
                 Users user = userService.findById(userId);
                 Commission comm = orderService.findCommisionById(Integer.parseInt(request.getParameter("commission")));
                 Delivery deli = orderService.findDeliveryById(Integer.parseInt(request.getParameter("delivery")));
-                BigDecimal total = new BigDecimal(request.getParameter("total"));
-                BigDecimal amount = total.add(comm.getCost().add(BigDecimal.valueOf(deli.getPrice())));
-                System.out.println(amount + " "+ comm.getCost() + " " + BigDecimal.valueOf(deli.getPrice()));
                 String address = request.getParameter("address");
                 int phone = Integer.parseInt(request.getParameter("phone"));
 
+                Cart cart = cartService.findCartByUserId(userId);
+                BigDecimal total = new BigDecimal(0);
+                //tinh tong tien
+                for (CartItem cartItem : cart.getCartItems()){
+                    total = total.add(cartItem.getProduct().getPrice().multiply(new BigDecimal(cartItem.getCount())));
+                }
+                BigDecimal amount = total.add(comm.getCost().add(BigDecimal.valueOf(deli.getPrice())));
                 //tạo order
                 Orders orders = new Orders(comm, deli, user, address, phone, amount);
                 orderService.insert(orders);
                 //thêm orderitem vào order
-                Cart cart = cartService.findCartByUserId(userId);
                 for (CartItem cartItem : cart.getCartItems()){
                     OrderItem orderItem = new OrderItem(cartItem.getProduct(), cartItem.getCount(), cartItem.getProduct().getStore(),
                             cartItem.getProduct().getPrice().multiply(new BigDecimal(0.04)),

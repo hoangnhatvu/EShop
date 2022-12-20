@@ -19,7 +19,7 @@
   <meta content="Free HTML Templates" name="description">
 
   <!-- Favicon -->
-  <link href="templates/img/favicon.ico" rel="icon">
+  <link href="<%=request.getContextPath()%>/templates/img/favicon.ico" rel="icon">
 
   <!-- Google Web Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -29,10 +29,10 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
   <!-- Libraries Stylesheet -->
-  <link href="templates/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/templates/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
   <!-- Customized Bootstrap Stylesheet -->
-  <link href="templates/css/style.css" rel="stylesheet">
+  <link href="<%=request.getContextPath()%>/templates/css/style.css" rel="stylesheet">
 </head>
 
 

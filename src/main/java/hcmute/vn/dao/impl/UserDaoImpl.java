@@ -2,6 +2,7 @@ package hcmute.vn.dao.impl;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IUserDao;
@@ -58,20 +59,31 @@ public class UserDaoImpl implements IUserDao {
 	}
 	
 	public Users findByEmail(String email) {
-
-		EntityManager enma = JPAConfig.getEntityManager();
-
-		Users user = (Users)enma.createQuery("FROM Users U WHERE U.email = :email").setParameter("email", email).getSingleResult();				
-
-		return user;
+		Users user = null;
+		try {
+			EntityManager enma = JPAConfig.getEntityManager();
+			user = (Users)enma.createQuery("FROM Users U WHERE U.email = :email").setParameter("email", email).getSingleResult();
+			return user;
+		} catch (NoResultException e){
+			e.printStackTrace();
+		}
+		finally {
+			return user;
+		}
 	}
 	
 	public Users findById(int userid) {
-		EntityManager enma = JPAConfig.getEntityManager();
-
-		Users user = enma.find(Users.class, userid);
-
-		return user;
+		Users user = null;
+		try {
+			EntityManager enma = JPAConfig.getEntityManager();
+			user = enma.find(Users.class, userid);
+			return user;
+		} catch (NoResultException e){
+			e.printStackTrace();
+		}
+		finally {
+			return user;
+		}
 	}
 
 	@Override

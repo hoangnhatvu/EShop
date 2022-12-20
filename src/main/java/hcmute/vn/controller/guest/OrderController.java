@@ -5,7 +5,7 @@ import hcmute.vn.service.IOrderItemService;
 import hcmute.vn.service.IOrderService;
 import hcmute.vn.service.IReviewService;
 import hcmute.vn.service.IUserService;
-import hcmute.vn.service.impl.IOrderItemServiceImpl;
+import hcmute.vn.service.impl.OrderItemServiceImpl;
 import hcmute.vn.service.impl.OrderServiceImpl;
 import hcmute.vn.service.impl.ReviewServiceImpl;
 import hcmute.vn.service.impl.UserServiceImpl;
@@ -23,7 +23,7 @@ import java.util.List;
 public class OrderController extends HttpServlet {
     IOrderService orderService = new OrderServiceImpl();
     IUserService userService = new UserServiceImpl();
-    IOrderItemService orderItemService = new IOrderItemServiceImpl();
+    IOrderItemService orderItemService = new OrderItemServiceImpl();
     IReviewService reviewService = new ReviewServiceImpl();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class OrderController extends HttpServlet {
             deleteOrder(request, response);
             findAllOrder(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/OrderList.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/OrderList.jsp").forward(request, response);
             }
         } else if(url.contains("addReview")){
             addReview(request, response);
@@ -40,7 +40,7 @@ public class OrderController extends HttpServlet {
         else{
             findAllOrder(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/OrderList.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/OrderList.jsp").forward(request, response);
             }
         }
 

@@ -51,6 +51,13 @@ public class StoreDaoImpl implements IStoreDao {
 	}
 
 	@Override
+	public List<Store> findTopVendor() {
+		EntityManager enma = JPAConfig.getEntityManager();
+		List<Store> stores = (List<Store>) enma.createQuery("FROM Store S ORDER BY S.rating").setMaxResults(6).getResultList();
+		return stores;
+	}
+
+	@Override
 	public List<Store> findStoresByName(String searchString) {
 		EntityManager enma = JPAConfig.getEntityManager();
 		List<Store> stores = (List<Store>) enma.createQuery("FROM Store S WHERE S.name like :name").setParameter("name", "%" + searchString + "%").getResultList();

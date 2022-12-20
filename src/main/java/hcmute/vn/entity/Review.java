@@ -41,6 +41,15 @@ public class Review implements java.io.Serializable {
         this.createAt = new Date();
         this.updateAt = new Date();
     }
+    public Review(Users users, Product product, Store store, String content) {
+        this.user = users;
+        this.product = product;
+        this.store = store;
+        this.content = content;
+        this.stars = 0;
+        this.createAt = new Date();
+        this.updateAt = new Date();
+    }
 
 
     @Id

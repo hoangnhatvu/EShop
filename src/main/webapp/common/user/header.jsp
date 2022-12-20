@@ -12,6 +12,8 @@
 <jsp:include page="../views/user-template/head/topBar.jsp"/>
 <div class="container-fluid mb-5">
   <div class="row border-top px-xl-5">
-    <jsp:include page="../views/user-template/head/categoryList.jsp"/>
+      <jsp:include page="../views/user-template/head/categoryList.jsp">
+          <jsp:param name="categories" value="${categories}"/>
+      </jsp:include>
     <div class="col-lg-9">
       <jsp:include page="../views/user-template/head/navMember.jsp"/>

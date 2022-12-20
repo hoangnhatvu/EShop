@@ -5,22 +5,26 @@
   Time: 21:30
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <div class="container-fluid py-5">
   <div class="row px-xl-5">
     <div class="col-lg-5 pb-5">
       <div id="product-carousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner border">
           <div class="carousel-item active">
-            <img class="w-100 h-100" src="templates/img/product-1.jpg" alt="Image">
+            <img class="w-100 h-100" src="${product.listImage}" alt="Image">
           </div>
           <div class="carousel-item">
-            <img class="w-100 h-100" src="templates/img/product-2.jpg" alt="Image">
+            <img class="w-100 h-100" src="${product.listImage}" alt="Image">
           </div>
           <div class="carousel-item">
-            <img class="w-100 h-100" src="templates/img/product-3.jpg" alt="Image">
+            <img class="w-100 h-100" src="${product.listImage}" alt="Image">
           </div>
           <div class="carousel-item">
-            <img class="w-100 h-100" src="templates/img/product-4.jpg" alt="Image">
+            <img class="w-100 h-100" src="${product.listImage}" alt="Image">
           </div>
         </div>
         <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -33,19 +37,20 @@
     </div>
 
     <div class="col-lg-7 pb-5">
-      <h3 class="font-weight-semi-bold">Colorful Stylish Shirt</h3>
+      <h3 class="font-weight-semi-bold">${product.name}</h3>
       <div class="d-flex mb-3">
         <div class="text-primary mr-2">
-          <small class="fa fa-star"></small>
-          <small class="fa fa-star"></small>
-          <small class="fa fa-star"></small>
-          <small class="fa fa-star-half-alt"></small>
+          <c:forEach begin="${1}" end="${product.rating}">
+            <small class="fa fa-star"></small>
+          </c:forEach>
+          <c:forEach begin="${product.rating + 1}" end="${5}">
           <small class="far fa-star"></small>
+          </c:forEach>
         </div>
-        <small class="pt-1">(50 Reviews)</small>
+        <small class="pt-1">(${fn:length(reviews)})</small>
       </div>
-      <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
-      <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit clita ea. Sanc invidunt ipsum et, labore clita lorem magna lorem ut. Erat lorem duo dolor no sea nonumy. Accus labore stet, est lorem sit diam sea et justo, amet at lorem et eirmod ipsum diam et rebum kasd rebum.</p>
+      <h3 class="font-weight-semi-bold mb-4">$${product.promotionalPrice}   <del>${product.price}</del></h3>
+      <p class="mb-4">${product.slug}</p>
       <div class="d-flex mb-3">
         <p class="text-dark font-weight-medium mb-0 mr-3">Sizes:</p>
         <form>
@@ -72,31 +77,32 @@
         </form>
       </div>
       <div class="d-flex mb-4">
-        <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
+        <p class="text-dark font-weight-medium mb-0 mr-3">Màu sắc:</p>
         <form>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="color-1" name="color">
-            <label class="custom-control-label" for="color-1">Black</label>
+            <label class="custom-control-label" for="color-1">Đen</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="color-2" name="color">
-            <label class="custom-control-label" for="color-2">White</label>
+            <label class="custom-control-label" for="color-2">Trắng</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="color-3" name="color">
-            <label class="custom-control-label" for="color-3">Red</label>
+            <label class="custom-control-label" for="color-3">Đỏ</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="color-4" name="color">
-            <label class="custom-control-label" for="color-4">Blue</label>
+            <label class="custom-control-label" for="color-4">Xanh</label>
           </div>
           <div class="custom-control custom-radio custom-control-inline">
             <input type="radio" class="custom-control-input" id="color-5" name="color">
-            <label class="custom-control-label" for="color-5">Green</label>
+            <label class="custom-control-label" for="color-5">Vàng</label>
           </div>
         </form>
       </div>
       <div class="d-flex align-items-center mb-4 pt-2">
+        <a href="<%=request.getContextPath()%>/followProduct?productId=${requestScope.prod.id}" class="btn btn-sm text-dark px-3 mr-3"><i class="fas fa-heart mr-1"></i>Theo dõi</a>
         <div class="input-group quantity mr-3" style="width: 130px;">
           <div class="input-group-btn">
             <button class="btn btn-primary btn-minus" >
@@ -110,22 +116,22 @@
             </button>
           </div>
         </div>
-        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+        <a href="<%=request.getContextPath()%>/product/addToCart?productId=${product.id}" class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Thêm vào giỏ hàng</a>
       </div>
       <div class="d-flex pt-2">
-        <p class="text-dark font-weight-medium mb-0 mr-2">Share on:</p>
+        <p class="text-dark font-weight-medium mb-0 mr-2">Chia sẻ:</p>
         <div class="d-inline-flex">
           <a class="text-dark px-2" href="">
-            <i class="fa fa-facebook-f"></i>
+            <i class="fab fa-facebook-f"></i>
           </a>
           <a class="text-dark px-2" href="">
-            <i class="fa fa-twitter"></i>
+            <i class="fab fa-twitter"></i>
           </a>
           <a class="text-dark px-2" href="">
-            <i class="fa fa-linkedin-in"></i>
+            <i class="fab fa-linkedin-in"></i>
           </a>
           <a class="text-dark px-2" href="">
-            <i class="fa fa-pinterest"></i>
+            <i class="fab fa-pinterest"></i>
           </a>
         </div>
       </div>
@@ -134,98 +140,50 @@
   <div class="row px-xl-5">
     <div class="col">
       <div class="nav nav-tabs justify-content-center border-secondary mb-4">
-        <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Description</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Information</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+        <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Chi tiết</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-2">Shop</a>
+        <a class="nav-item nav-link" data-toggle="tab" href="#tab-pane-3">Đánh giá (${fn:length(reviews)})</a>
       </div>
       <div class="tab-content">
         <div class="tab-pane fade show active" id="tab-pane-1">
-          <h4 class="mb-3">Product Description</h4>
-          <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-          <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum. Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+          <h4 class="mb-3">Chi tiết sản phẩm</h4>
+          <p>${product.desciption}</p>
         </div>
+
         <div class="tab-pane fade" id="tab-pane-2">
-          <h4 class="mb-3">Additional Information</h4>
-          <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam. Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-          <div class="row">
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item px-0">
-                  Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                </li>
-                <li class="list-group-item px-0">
-                  Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                </li>
-                <li class="list-group-item px-0">
-                  Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                </li>
-                <li class="list-group-item px-0">
-                  Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                </li>
-              </ul>
-            </div>
-            <div class="col-md-6">
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item px-0">
-                  Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                </li>
-                <li class="list-group-item px-0">
-                  Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                </li>
-                <li class="list-group-item px-0">
-                  Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                </li>
-                <li class="list-group-item px-0">
-                  Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                </li>
-              </ul>
-            </div>
+          <div>
+            <a class="d-flex mb-3" href="<%=request.getContextPath()%>/store?storeId=${requestScope.store.id}">
+              <img src="${store.avatar}" class="img-fluid-avatar mr-5">
+              <div class="d-block">
+                <h4 class="font-weight-semi-bold">${store.name}</h4>
+                <div class="text-primary mr-2">
+                  <c:forEach begin="${1}" end="${store.rating}">
+                    <small class="fa fa-star"></small>
+                  </c:forEach>
+                  <c:forEach begin="${store.rating + 1}" end="${5}">
+                    <small class="far fa-star"></small>
+                  </c:forEach>
+                </div>
+              </div>
+            </a>
           </div>
-        </div>
+          <p>${store.bio}</p>
+          </div>
         <div class="tab-pane fade" id="tab-pane-3">
           <div class="row">
             <div class="col-md-6">
-              <h4 class="mb-4">1 review for "Colorful Stylish Shirt"</h4>
-              <div class="media mb-4">
-                <img src="templates/img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                <div class="media-body">
-                  <h6>John Doe<small> - <i>01 Jan 2045</i></small></h6>
-                  <div class="text-primary mb-2">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star-half-alt"></i>
-                    <i class="far fa-star"></i>
-                  </div>
-                  <p>Diam amet duo labore stet elitr ea clita ipsum, tempor labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.</p>
-                </div>
-              </div>
+              <h4 class="mb-4">${fn:length(reviews)} review for "${product.name}"</h4>
+              <c:forEach var="review" items="${reviews}">
+                <c:set var="review" value="${review}" scope="request"/>
+                <c:import url="/views/user-template/include/commentBox.jsp"/>
+              </c:forEach>
             </div>
             <div class="col-md-6">
-              <h4 class="mb-4">Leave a review</h4>
-              <small>Your email address will not be published. Required fields are marked *</small>
-              <div class="d-flex my-3">
-                <p class="mb-0 mr-2">Your Rating * :</p>
-                <div class="text-primary">
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                  <i class="far fa-star"></i>
-                </div>
-              </div>
-              <form>
+              <h4 class="mb-4">Đánh giá sản phẩm</h4>
+              <form method="post" action="<%=request.getContextPath()%>/product/addRview?prodId=${product.id}">
                 <div class="form-group">
                   <label for="message">Your Review *</label>
-                  <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                </div>
-                <div class="form-group">
-                  <label for="name">Your Name *</label>
-                  <input type="text" class="form-control" id="name">
-                </div>
-                <div class="form-group">
-                  <label for="email">Your Email *</label>
-                  <input type="email" class="form-control" id="email">
+                  <textarea name="content" id="message" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
                 <div class="form-group mb-0">
                   <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">

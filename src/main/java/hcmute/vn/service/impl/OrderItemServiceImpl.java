@@ -9,7 +9,7 @@ import hcmute.vn.service.IOrderItemService;
 
 import java.util.List;
 
-public class IOrderItemServiceImpl implements IOrderItemService {
+public class OrderItemServiceImpl implements IOrderItemService {
     IOrderItemDao orderItemDao = new OrderItemDaoImpl();
     @Override
     public void insert(OrderItem orderItem) {

@@ -5,14 +5,16 @@
   Time: 21:16
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <div class="col-lg-3 col-md-12">
     <!-- Price Start -->
     <div class="border-bottom mb-4 pb-4">
-        <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
+        <h5 class="font-weight-semi-bold mb-4">Lọc theo giá</h5>
         <form>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" checked id="price-all">
-                <label class="custom-control-label" for="price-all">All Price</label>
+                <label class="custom-control-label" for="price-all">Tất cả</label>
                 <span class="badge border font-weight-normal">1000</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
@@ -46,36 +48,36 @@
 
     <!-- Color Start -->
     <div class="border-bottom mb-4 pb-4">
-        <h5 class="font-weight-semi-bold mb-4">Filter by color</h5>
+        <h5 class="font-weight-semi-bold mb-4">Lọc theo màu</h5>
         <form>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" checked id="color-all">
-                <label class="custom-control-label" for="price-all">All Color</label>
+                <label class="custom-control-label" for="price-all">Tất cả màu</label>
                 <span class="badge border font-weight-normal">1000</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" id="color-1">
-                <label class="custom-control-label" for="color-1">Black</label>
+                <label class="custom-control-label" for="color-1">Đen</label>
                 <span class="badge border font-weight-normal">150</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" id="color-2">
-                <label class="custom-control-label" for="color-2">White</label>
+                <label class="custom-control-label" for="color-2">Trắng</label>
                 <span class="badge border font-weight-normal">295</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" id="color-3">
-                <label class="custom-control-label" for="color-3">Red</label>
+                <label class="custom-control-label" for="color-3">Đỏ</label>
                 <span class="badge border font-weight-normal">246</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" id="color-4">
-                <label class="custom-control-label" for="color-4">Blue</label>
+                <label class="custom-control-label" for="color-4">Xanh</label>
                 <span class="badge border font-weight-normal">145</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
                 <input type="checkbox" class="custom-control-input" id="color-5">
-                <label class="custom-control-label" for="color-5">Green</label>
+                <label class="custom-control-label" for="color-5">Vàng</label>
                 <span class="badge border font-weight-normal">168</span>
             </div>
         </form>
@@ -84,11 +86,11 @@
 
     <!-- Size Start -->
     <div class="mb-5">
-        <h5 class="font-weight-semi-bold mb-4">Filter by size</h5>
+        <h5 class="font-weight-semi-bold mb-4">Lọc theo size</h5>
         <form>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
                 <input type="checkbox" class="custom-control-input" checked id="size-all">
-                <label class="custom-control-label" for="size-all">All Size</label>
+                <label class="custom-control-label" for="size-all">Tất cả Size</label>
                 <span class="badge border font-weight-normal">1000</span>
             </div>
             <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">

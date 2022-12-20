@@ -195,6 +195,10 @@ img {
   vertical-align: middle;
   border-style: none;
 }
+.vendor-img{
+  width: 135px !important;
+  height: 135px;
+}
 
 svg {
   overflow: hidden;
@@ -528,6 +532,24 @@ mark,
 .img-fluid {
   max-width: 100%;
   height: auto;
+}
+
+.img-fluid-cate {
+  max-width: 100%;
+  height: 331px;
+}
+
+.img-fluid-prod {
+  max-width: 100%;
+  height: 250px;
+}
+.img-fluid-avatar {
+  max-width: 100px;
+  height: 100px;
+}
+.img-fluid-store-avatar {
+  max-width: 200px;
+  height: 200px;
 }
 
 .img-thumbnail {
@@ -3964,7 +3986,7 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link.active,
 .nav-tabs .nav-item.show .nav-link {
-  color: #495057;
+  color: #ba6a62;
   background-color: #fff;
   border-color: #dee2e6 #dee2e6 #fff;
 }
@@ -4572,8 +4594,11 @@ input[type="button"].btn-block {
 
 .pagination {
   display: flex;
-  padding-left: 0;
+  padding-left: 40%;
   list-style: none;
+}
+.pagi-item {
+  margin-right: 10px;
 }
 
 .page-link {

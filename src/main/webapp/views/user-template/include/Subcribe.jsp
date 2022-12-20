@@ -10,14 +10,14 @@
   <div class="row justify-content-md-center py-5 px-xl-5">
     <div class="col-md-6 col-12 py-5">
       <div class="text-center mb-2 pb-2">
-        <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
-        <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
+        <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Đăng ký Tài khoản</span></h2>
+        <p>Đăng ký tài khoản sớm để nhận được những voucher giảm giá cực chất lượng đến từ E Shop.</p>
       </div>
       <form action="">
         <div class="input-group">
-          <input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
+          <input type="text" class="form-control border-white p-4" placeholder="Nhập email">
           <div class="input-group-append">
-            <button class="btn btn-primary px-4">Subscribe</button>
+            <button class="btn btn-primary px-4">Đăng ký</button>
           </div>
         </div>
       </form>

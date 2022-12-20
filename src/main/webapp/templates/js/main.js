@@ -99,6 +99,36 @@
         }
         button.parent().parent().find('input').val(newVal);
     });
+
+    // Password compare
+    $('#newPassword, #confirmNewPassword').on('keyup', function () {
+        if ($('#newPassword').val() == $('#confirmNewPassword').val()) {
+            $('#message').html('Mật khẩu mới hợp lệ').css('color', 'green');
+            $('#submitBtn').removeAttr('disabled');
+        } else {
+            $('#message').html('Mật khẩu mới không trùng nhau').css('color', 'red');
+            $('#submitBtn').attr('disabled');
+        }
+    });
+
+    // chang quantity cartitem
+    $(".cartItemQuantity" ).change(function() {
+        $.ajax({
+            url:'<%=request.getContextPath()%>/cart/updateQuantity',
+            data:{quantity: $(this).val(), id: $(this).attr("id") },
+            type:'post',
+            cache:false,
+            success:function(data){
+                var id = $(this).attr("id");
+                const totalPerItem = document.getElementById(`totalPerItem${id}`).value;
+                const total = document.getElementById("total");
+                total.value = "100";
+            },
+            error:function(){
+                alert('error');
+            }
+        })
+    });
     
 })(jQuery);
 

@@ -49,20 +49,31 @@
 </form>
 </c:if>
 <script>
-    $(".cartItemQuantity" ).change(function() {
+    $('.quantity button').on('click', function () {
+        var button = $(this);
+        var oldValue = button.parent().parent().find('input').val();
+        var itemId = button.parent().parent().find('input').attr("id");
+        if (button.hasClass('btn-plus')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            if (oldValue > 1) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 1;
+            }
+        }
+        button.parent().parent().find('input').val(newVal);
+
         $.ajax({
             url:'<%=request.getContextPath()%>/cart/updateQuantity',
-            data:{quantity: $(this).val(), id: $(this).attr("id") },
+            data:{quantity: newVal, id: itemId },
             type:'post',
             cache:false,
             success:function(data){
-                var id = $(this).attr("id");
-                const totalPerItem = document.getElementById(`totalPerItem${id}`).value;
-                const total = document.getElementById("total");
-                total.value = "100";
+
             },
-            error:function(){
-                alert('error');
+            error:function(data){
+                alert("error");
             }
         })
     });

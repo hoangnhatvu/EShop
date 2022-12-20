@@ -30,4 +30,9 @@ public class StoreServiceImpl implements IStoreService{
 	public List<Store> findAll() {
 		return storeDao.findAll();
 	}
+
+	@Override
+	public List<Store> findTopVendor() {
+		return storeDao.findTopVendor();
+	}
 }

@@ -5,6 +5,8 @@
   Time: 20:02
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <body>
 <div class="container-fluid">
   <div class="row bg-secondary py-2 px-xl-5">
@@ -39,14 +41,14 @@
   </div>
   <div class="row align-items-center py-3 px-xl-5">
     <div class="col-lg-3 d-none d-lg-block">
-      <a href="" class="text-decoration-none">
+      <a href="<%=request.getContextPath()%>" class="text-decoration-none">
         <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
       </a>
     </div>
     <div class="col-lg-6 col-6 text-left">
       <form action="<%=request.getContextPath()%>/search" method="post" role="search">
         <div class="input-group">
-          <input type="search" name="searchString" class="form-control" placeholder="Search for products">
+          <input type="search" name="searchString" class="form-control" placeholder="Tìm kiếm sản phẩm">
           <div class="input-group-append">
                             <button type="submit" class="input-group-text bg-transparent text-primary">
                                 <i class="fa fa-search"></i>

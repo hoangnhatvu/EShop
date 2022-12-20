@@ -6,11 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+</div>
+</div>
+</div>
+<div class="container" style="width: 50%;">
 <form method="post" action="changePasswd">
   <div>Mật khẩu cũ</div><input name="password" id="password" type="password" required>
   <div>Mật khẩu mới</div><input name="newPassword" id="newPassword" type="password" minlength="8" required>
@@ -20,16 +19,8 @@
   <button id="submitBtn" type="submit">Thay đổi</button>
 </form>
 ${updateMsg}
+</div>
 <script>
-  $('#newPassword, #confirmNewPassword').on('keyup', function () {
-    if ($('#newPassword').val() == $('#confirmNewPassword').val()) {
-      $('#message').html('Mật khẩu mới hợp lệ').css('color', 'green');
-      $('#submitBtn').removeAttr('disabled');
-    } else {
-      $('#message').html('Mật khẩu mới không trùng nhau').css('color', 'red');
-      $('#submitBtn').attr('disabled');
-    }
-  });
+
 </script>
-</body>
-</html>
+

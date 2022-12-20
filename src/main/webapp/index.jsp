@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="views/user-template/index.jsp"/>
 <%--<!DOCTYPE html>--%>
 <%--<html>--%>
 <%--<head>--%>

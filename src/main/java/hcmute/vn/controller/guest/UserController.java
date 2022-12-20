@@ -43,7 +43,7 @@ public class UserController extends HttpServlet {
         else{
             findUser(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/account.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/account.jsp").forward(request, response);
             }
         }
     }
@@ -54,14 +54,14 @@ public class UserController extends HttpServlet {
             PostChangePasswd(request, response);
             findUser(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/account.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/account.jsp").forward(request, response);
             }
         }
         else if (url.contains("update")) {
             updateAccount(request, response);
             findUser(request, response);
             if (!response.isCommitted()) {
-                request.getRequestDispatcher("/views/user/account.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/account.jsp").forward(request, response);
             }
         }
     }
@@ -80,7 +80,7 @@ public class UserController extends HttpServlet {
                 List<UserFollowStore> ufss = followService.findUFSByUId(userId);
                 request.setAttribute("ufps", ufps);
                 request.setAttribute("ufss", ufss);
-                request.getRequestDispatcher("/views/user/follow.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/follow.jsp").forward(request, response);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -157,7 +157,7 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(request.getContextPath() + "/login");
             }
             else {
-                request.getRequestDispatcher("/views/user/changePassword.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/user-template/bodyContent/changePassword.jsp").forward(request, response);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -184,7 +184,7 @@ public class UserController extends HttpServlet {
 
                 } else{
                     request.setAttribute("updateMsg", "Mật khẩu cũ không chính xác");
-                    request.getRequestDispatcher("/views/user/changePassword.jsp").forward(request, response);
+                    request.getRequestDispatcher("/views/user-template/bodyContent/changePassword.jsp").forward(request, response);
                 }
             }
         }catch (Exception e){

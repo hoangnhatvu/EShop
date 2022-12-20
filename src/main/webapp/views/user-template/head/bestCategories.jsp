@@ -6,61 +6,24 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="container-fluid pt-5">
   <div class="row px-xl-5 pb-3">
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-1.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Men's dresses</h5>
+  <c:set var="count" value="0"/>
+  <c:forEach var="cate" items="${categories}">
+    <c:if test="${count lt 6}">
+      <div class="col-lg-4 col-md-6 pb-1">
+        <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
+          <p class="text-right">15 Sản phẩm</p>
+          <a href="<%=request.getContextPath()%>/product?cateId=${cate.id}" class="cat-img position-relative overflow-hidden mb-3">
+            <img class="img-fluid-cate" src="${cate.image}" alt="">
+          </a>
+          <h5 class="font-weight-semi-bold m-0">${cate.name}</h5>
+        </div>
       </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-2.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Women's dresses</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-3.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Baby's dresses</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-4.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Accerssories</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-5.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Bags</h5>
-      </div>
-    </div>
-    <div class="col-lg-4 col-md-6 pb-1">
-      <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
-        <p class="text-right">15 Products</p>
-        <a href="" class="cat-img position-relative overflow-hidden mb-3">
-          <img class="img-fluid" src="templates/img/cat-6.jpg" alt="">
-        </a>
-        <h5 class="font-weight-semi-bold m-0">Shoes</h5>
-      </div>
-    </div>
+      <c:set var="count" value="${count + 1}"/>
+    </c:if>
+  </c:forEach>
   </div>
 </div>
