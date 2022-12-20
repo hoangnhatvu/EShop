@@ -11,4 +11,7 @@ public interface IStoreService {
 
 	public List<Store> findStoresByName(String searchString);
 	public Store findStoresById(int id);
+	void delete(int storeId) throws Exception;
+	void update(Store store);
+	Store findbyId(int storeId);
 }

@@ -1,9 +1,9 @@
 package hcmute.vn.dao;
+import java.util.List;
 import hcmute.vn.entity.Product;
 
-import java.util.List;
-
 public interface IProductDao {
+
     public List<Product> findProductByName(String searchString);
     public List<Product> findAll(int page, int pageSize);
     public List<Product> findRelatedProd(Product product);
@@ -15,6 +15,10 @@ public interface IProductDao {
     public int count();
     public Product findProductById(int prodId);
     public List<Product> findProductByStoreId(int prodId);
-
     public List<Product> findProductByCateId(int cateId, int page, int pageSize);
-    }
+	List<Product> findAll();
+	void update(Product product);
+	Product findById(int productId);
+	void delete(int prodId) throws Exception;
+	void insert(Product product);
+}

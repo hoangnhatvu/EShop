@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -23,6 +24,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Delivery", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
 public class Delivery implements java.io.Serializable {
 
 	private Integer id;

@@ -3,7 +3,6 @@ package hcmute.vn.dao;
 import hcmute.vn.entity.Commission;
 import hcmute.vn.entity.Delivery;
 import hcmute.vn.entity.Orders;
-
 import java.util.List;
 
 public interface IOrderDao {
@@ -16,4 +15,6 @@ public interface IOrderDao {
     public void insert (Orders order);
     public void update (Orders order);
     public void delete (Orders order) throws Exception;
+	List<Orders> findAll();
+
 }

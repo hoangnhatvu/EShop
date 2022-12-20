@@ -1,15 +1,13 @@
 package hcmute.vn.service.impl;
-
+import java.util.List;
 import hcmute.vn.dao.IProductDao;
 import hcmute.vn.dao.impl.ProductDaoImpl;
 import hcmute.vn.entity.Product;
 import hcmute.vn.service.IProductService;
 
-import java.util.List;
+public class ProductServiceImpl implements IProductService{
 
-public class ProductServiceImpl implements IProductService {
-    IProductDao productDao = new ProductDaoImpl();
-
+	IProductDao productDao = new ProductDaoImpl();
     @Override
     public List<Product> findProductByName(String searchString) {
         return productDao.findProductByName(searchString);
@@ -62,4 +60,34 @@ public class ProductServiceImpl implements IProductService {
     public List<Product> findProductByCateId(int cateId, int page, int pageSize) {
         return productDao.findProductByCateId(cateId, page, pageSize);
     }
+	@Override
+	public List<Product> findAll()
+	{
+		return productDao.findAll();
+	}
+	
+	@Override
+	public void update(Product product)
+	{
+		 productDao.update(product);
+	}
+	
+	@Override
+	public Product findbyId(int productId)
+	{
+		return productDao.findById(productId);
+	}
+	
+	@Override
+	public void delete(int prodId) throws Exception
+	{
+		 productDao.delete(prodId);
+	}
+	
+	@Override
+	public void insert(Product product)
+	{
+		productDao.insert(product);
+	}
+
 }

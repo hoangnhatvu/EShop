@@ -1,16 +1,26 @@
 package hcmute.vn.dao.impl;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IOrderDao;
-import hcmute.vn.entity.Cart;
 import hcmute.vn.entity.Commission;
 import hcmute.vn.entity.Delivery;
 import hcmute.vn.entity.Orders;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-import java.util.List;
 
 public class OrderDaoImpl implements IOrderDao {
+
+	@Override
+	public List<Orders> findAll() {
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		TypedQuery<Orders> query = enma.createNamedQuery("Orders.findAll", Orders.class);
+
+		return query.getResultList();
+
+	}
     @Override
     public Orders findbyId(int id) {
         EntityManager enma = JPAConfig.getEntityManager();
@@ -99,8 +109,9 @@ public class OrderDaoImpl implements IOrderDao {
             e.printStackTrace();
             trans.rollback();
             throw e;
-        }finally {
+        } finally {
             enma.close();
         }
     }
+
 }

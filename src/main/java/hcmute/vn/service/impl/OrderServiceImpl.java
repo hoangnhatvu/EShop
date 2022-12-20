@@ -1,5 +1,5 @@
 package hcmute.vn.service.impl;
-
+import java.util.List;
 import hcmute.vn.dao.IOrderDao;
 import hcmute.vn.dao.impl.OrderDaoImpl;
 import hcmute.vn.entity.Commission;
@@ -7,10 +7,14 @@ import hcmute.vn.entity.Delivery;
 import hcmute.vn.entity.Orders;
 import hcmute.vn.service.IOrderService;
 
-import java.util.List;
-
 public class OrderServiceImpl implements IOrderService {
-    IOrderDao orderDao = new OrderDaoImpl();
+
+	IOrderDao orderDao = new OrderDaoImpl();
+
+	@Override
+	public List<Orders> findAll() {
+		return orderDao.findAll();
+	}
     @Override
     public Orders findbyId(int id) {
         return orderDao.findbyId(id);
@@ -41,4 +45,5 @@ public class OrderServiceImpl implements IOrderService {
     public void delete(Orders order) throws Exception {
         orderDao.delete(order);
     }
+
 }

@@ -1,13 +1,13 @@
 package hcmute.vn.dao.impl;
-
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.IProductDao;
 import hcmute.vn.entity.Product;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
-public class ProductDaoImpl implements IProductDao {
+public class ProductDaoImpl implements IProductDao{
     @Override
     public List<Product> findProductByName(String searchString) {
         EntityManager enma = JPAConfig.getEntityManager();
@@ -87,4 +87,129 @@ public class ProductDaoImpl implements IProductDao {
         int count = ((Long) enma.createQuery("SELECT count(P) FROM Product P WHERE P.categoryId =:cateId and P.isSelling = true").setParameter("cateId", cateId).getSingleResult()).intValue();
         return count;
     }
+	@Override
+	public List<Product> findAll()
+	{
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		TypedQuery<Product> query = enma.createNamedQuery("Product.findAll", Product.class);
+
+		return query.getResultList();
+		
+	}
+	
+	@Override
+	public void update(Product product) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			enma.merge(product);
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+	
+	@Override
+	public Product findById(int productId) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		Product product = enma.find(Product.class, productId);
+
+		return product;
+
+	}
+	
+	@Override
+	public void delete(int prodId) throws Exception {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			Product product = enma.find(Product.class, prodId);
+
+			if (product != null) {
+
+				enma.remove(product);
+
+			} else {
+
+				throw new Exception("Không tìm thấy");
+
+			}
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+	
+	@Override
+	public void insert(Product product) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			enma.persist(product);
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+
 }

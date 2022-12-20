@@ -1,19 +1,145 @@
 package hcmute.vn.dao.impl;
 
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+
 import hcmute.vn.config.JPAConfig;
 import hcmute.vn.dao.ICategoryDao;
 import hcmute.vn.entity.Category;
 
-import javax.persistence.EntityManager;
-import java.util.List;
+public class CategoryDaoImpl implements ICategoryDao{
 
-public class CategoryDaoImpl implements ICategoryDao {
-    @Override
-    public List<Category> findAll() {
-        EntityManager enma = JPAConfig.getEntityManager();
-        List<Category> categories = (List<Category>) enma.createQuery("FROM Category C").setMaxResults(10).getResultList();
-        return categories;
-    }
+
+	@Override
+	public List<Category> findAll()
+	{
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		TypedQuery<Category> query = enma.createNamedQuery("Category.findAll", Category.class);
+
+		return query.getResultList();
+
+	}
+
+
+	@Override
+	public void update(Category category) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			enma.merge(category);
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+
+
+	@Override
+	public Category findById(int categoryId) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		Category category = enma.find(Category.class, categoryId);
+
+		return category;
+
+	}
+
+
+	@Override
+	public void delete(int categoryId) throws Exception {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			Category category = enma.find(Category.class, categoryId);
+
+			if (category != null) {
+
+				enma.remove(category);
+
+			} else {
+
+				throw new Exception("Không tìm thấy");
+
+			}
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+
+	@Override
+	public void insert(Category category) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			enma.persist(category);
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+	}
 
     @Override
     public int countProdByCateId(int cateId) {

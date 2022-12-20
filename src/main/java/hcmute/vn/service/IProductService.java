@@ -1,7 +1,6 @@
 package hcmute.vn.service;
-import hcmute.vn.entity.Product;
-
 import java.util.List;
+import hcmute.vn.entity.Product;
 
 public interface IProductService {
     public List<Product> findProductByName(String searchString);
@@ -16,5 +15,9 @@ public interface IProductService {
     public Product findProductById(int prodId);
     public List<Product> findProductByStoreId(int prodId);
     public List<Product> findProductByCateId(int cateId, int page, int pageSize);
-
-    }
+	List<Product> findAll();
+	void update(Product product);
+	Product findbyId(int productId);
+	void delete(int prodId) throws Exception;
+	void insert(Product product);
+}

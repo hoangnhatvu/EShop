@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,24 +22,43 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "StyleValue", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "StyleValue.findAll", query = "SELECT s FROM StyleValue s")
 public class StyleValue implements java.io.Serializable {
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "style_id", nullable = false)
 	private Style style;
-	private Serializable name;
+
+	@Column(name = "name", unique = true, nullable = false)
+
+	private String name;
+
+	@Column(name = "is_deleted")
+
 	private Boolean isDeleted;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	private Date createAt;
+
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
 
 	public StyleValue() {
 	}
 
-	public StyleValue(Style style, Serializable name) {
+	public StyleValue(Style style, String name) {
 		this.style = style;
 		this.name = name;
 	}
 
-	public StyleValue(Style style, Serializable name, Boolean isDeleted, Date createAt, Date updateAt) {
+	public StyleValue(Style style, String name, Boolean isDeleted, Date createAt, Date updateAt) {
 		this.style = style;
 		this.name = name;
 		this.isDeleted = isDeleted;
@@ -46,10 +66,6 @@ public class StyleValue implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -58,8 +74,6 @@ public class StyleValue implements java.io.Serializable {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "style_id", nullable = false)
 	public Style getStyle() {
 		return this.style;
 	}
@@ -68,16 +82,14 @@ public class StyleValue implements java.io.Serializable {
 		this.style = style;
 	}
 
-	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
-	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -86,8 +98,6 @@ public class StyleValue implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -96,8 +106,6 @@ public class StyleValue implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}

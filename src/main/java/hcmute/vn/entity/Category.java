@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,8 +23,13 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name = "Category", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
 public class Category implements java.io.Serializable {
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	private Category category;
 	private String name;
@@ -33,8 +39,6 @@ public class Category implements java.io.Serializable {
 	private Date updateAt;
 	private Set<Category> categories = new HashSet<Category>(0);
 	private Set<Style> styles = new HashSet<Style>(0);
-
-
 
 	public Category() {
 	}
@@ -78,7 +82,7 @@ public class Category implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public String getName() {
+	public Serializable getName() {
 		return this.name;
 	}
 
@@ -141,6 +145,5 @@ public class Category implements java.io.Serializable {
 	public void setStyles(Set<Style> styles) {
 		this.styles = styles;
 	}
-
 
 }

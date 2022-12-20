@@ -1,11 +1,20 @@
 package hcmute.vn.service;
 
-import hcmute.vn.entity.Category;
 
 import java.util.List;
 
-public interface ICategoryService {
-    public List<Category> findAll();
-    public int countProdByCateId(int cateId);
+import hcmute.vn.entity.Category;
 
+public interface ICategoryService {
+
+	void delete(int cateId) throws Exception;
+
+	void insert(Category cate);
+
+	void update(Category cate);
+
+	public List<Category> findAll();
+
+	public Category findByCateId(int cateId);
+	public int countProdByCateId(int cateId);
 }
