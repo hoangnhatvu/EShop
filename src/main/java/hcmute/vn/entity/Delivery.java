@@ -3,6 +3,7 @@ package hcmute.vn.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Delivery", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+@NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
 public class Delivery implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -29,7 +32,7 @@ public class Delivery implements java.io.Serializable {
 	private Boolean isDeleted;
 	private Date createAt;
 	private Date updateAt;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private List<Orders> orderses = null;
 
 	public Delivery() {
 	}
@@ -41,7 +44,11 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	public Delivery(String name, String desciption, int price, Boolean isDeleted, Date createAt,
+<<<<<<< HEAD
 			Date updateAt, Set<Orders> orderses) {
+=======
+			Date updateAt, List<Orders> orderses) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
@@ -64,7 +71,7 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
@@ -120,11 +127,11 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
-	public Set<Orders> getOrderses() {
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 

@@ -1,16 +1,34 @@
+<<<<<<< HEAD
 <decorators defaultdir="/decorators">	
+=======
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	<excludes>
+<<<<<<< HEAD
 		<pattern>/templates*</pattern>
+=======
+		<pattern>/templates/*</pattern>
+
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	</excludes>
-	
+
 	<decorator name="user" page="user.jsp">
 		<pattern>/*</pattern>
 		<pattern>/user*</pattern>
 	</decorator>
-	
+
 	<decorator name="vendor" page="vendor.jsp">
 		<pattern>/vendor*</pattern>
 	</decorator>
+<<<<<<< HEAD
 	
 </decorators> 
+=======
+
+	<decorator name="admin" page="admin.jsp">
+		<pattern>/admin/*</pattern>
+	</decorator>
+</decorators>
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 

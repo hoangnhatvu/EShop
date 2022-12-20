@@ -26,25 +26,58 @@ import javax.persistence.UniqueConstraint;
 public class Store implements java.io.Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 
-	private Integer id;
+	@Column(name = "id", unique = true, nullable = false)
+	private int id;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ownerId", nullable = false)
 	private Users users;
+	@Column(name = "name", unique = true, nullable = false, length = 100)
 	private String name;
+	@Column(name = "bio", nullable = false)
 	private String bio;
-	private Integer staffIds;
+	@Column(name = "staffIds")
+	private int staffIds;
+	@Column(name = "isActive")
 	private Boolean isActive;
+	@Column(name = "isOpen")
 	private Boolean isOpen;
+	@Column(name = "avatar", length = 100)
 	private String avatar;
+<<<<<<< HEAD
 	private Integer rating;
 	private Integer EWallet;
+=======
+	@Column(name = "rating")
+	private int rating;
+	@Column(name = "e_wallet", precision = 10)
+	private int EWallet;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createdAt", length = 10)
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private Date createdAt;
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	private List<UserFollowStore> userFollowStores;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	private List<Orders> orderses;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	private List<Product> products;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	private List<Cart> carts;
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "store")
+	@JoinColumn(name = "storelevelId", nullable = true)
 	private StoreLevel storeLevel;
+<<<<<<< HEAD
 	private List<Staffs> staffs;
+=======
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private List<Transactions> transactionses;
 
 	public Store() {
@@ -60,8 +93,13 @@ public class Store implements java.io.Serializable {
 		this.bio = bio;
 	}
 
+<<<<<<< HEAD
 	public Store(Users users, String name, String bio, Integer staffIds, Boolean isActive, Boolean isOpen,
 			String avatar, Integer rating, Integer EWallet, Date createdAt, Date updateAt, List<Staffs> staffs,
+=======
+	public Store(Users users, String name, String bio, int staffIds, Boolean isActive, Boolean isOpen,
+			String avatar, int rating, int EWallet, Date createdAt, Date updateAt,
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 			List<UserFollowStore> userFollowStores, List<Orders> orderses, List<Product> products, List<Cart> carts,
 			StoreLevel storeLevel, List<Transactions> transactionses) {
 		this.users = users;
@@ -84,20 +122,16 @@ public class Store implements java.io.Serializable {
 		this.transactionses = transactionses;
 	}
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
-	public Integer getId() {
+	
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ownerId", nullable = false)
+	
 	public Users getUsers() {
 		return this.users;
 	}
@@ -106,7 +140,7 @@ public class Store implements java.io.Serializable {
 		this.users = users;
 	}
 
-	@Column(name = "name", unique = true, nullable = false, length = 100)
+	
 	public String getName() {
 		return this.name;
 	}
@@ -115,7 +149,6 @@ public class Store implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "bio", nullable = false)
 	public String getBio() {
 		return this.bio;
 	}
@@ -124,16 +157,14 @@ public class Store implements java.io.Serializable {
 		this.bio = bio;
 	}
 
-	@Column(name = "staffIds")
-	public Integer getStaffIds() {
+	public int getStaffIds() {
 		return this.staffIds;
 	}
 
-	public void setStaffIds(Integer staffIds) {
+	public void setStaffIds(int staffIds) {
 		this.staffIds = staffIds;
 	}
 
-	@Column(name = "isActive")
 	public Boolean getIsActive() {
 		return this.isActive;
 	}
@@ -142,7 +173,6 @@ public class Store implements java.io.Serializable {
 		this.isActive = isActive;
 	}
 
-	@Column(name = "isOpen")
 	public Boolean getIsOpen() {
 		return this.isOpen;
 	}
@@ -151,7 +181,6 @@ public class Store implements java.io.Serializable {
 		this.isOpen = isOpen;
 	}
 
-	@Column(name = "avatar", length = 100)
 	public String getAvatar() {
 		return this.avatar;
 	}
@@ -160,26 +189,32 @@ public class Store implements java.io.Serializable {
 		this.avatar = avatar;
 	}
 
-	@Column(name = "rating")
-	public Integer getRating() {
+	public int getRating() {
 		return this.rating;
 	}
 
-	public void setRating(Integer rating) {
+	public void setRating(int rating) {
 		this.rating = rating;
 	}
 
+<<<<<<< HEAD
 	@Column(name = "e_wallet", precision = 10)
 	public Integer getEWallet() {
+=======
+	public int getEWallet() {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		return this.EWallet;
 	}
 
+<<<<<<< HEAD
 	public void setEWallet(Integer EWallet) {
+=======
+	public void setEWallet(int EWallet) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.EWallet = EWallet;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createdAt", length = 10)
+	
 	public Date getCreatedAt() {
 		return this.createdAt;
 	}
@@ -188,8 +223,7 @@ public class Store implements java.io.Serializable {
 		this.createdAt = createdAt;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
+	
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -198,7 +232,7 @@ public class Store implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+	
 	public List<UserFollowStore> getUserFollowStores() {
 		return this.userFollowStores;
 	}
@@ -206,6 +240,7 @@ public class Store implements java.io.Serializable {
 	public void setUserFollowStores(List<UserFollowStore> userFollowStores) {
 		this.userFollowStores = userFollowStores;
 	}
+<<<<<<< HEAD
 	
 	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
 	public List<Staffs> getStaffs() {
@@ -217,6 +252,9 @@ public class Store implements java.io.Serializable {
 	}
 	
 	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
+=======
+
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
@@ -225,7 +263,10 @@ public class Store implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
+<<<<<<< HEAD
 	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
+=======
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	public List<Product> getProducts() {
 		return this.products;
 	}
@@ -234,7 +275,6 @@ public class Store implements java.io.Serializable {
 		this.products = products;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	public List<Cart> getCarts() {
 		return this.carts;
 	}
@@ -243,7 +283,6 @@ public class Store implements java.io.Serializable {
 		this.carts = carts;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "store")
 	public StoreLevel getStoreLevel() {
 		return this.storeLevel;
 	}
@@ -252,7 +291,6 @@ public class Store implements java.io.Serializable {
 		this.storeLevel = storeLevel;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
 	public List<Transactions> getTransactionses() {
 		return this.transactionses;
 	}
@@ -261,6 +299,7 @@ public class Store implements java.io.Serializable {
 		this.transactionses = transactionses;
 	}
 	
+<<<<<<< HEAD
 	public Staffs addStaff(Staffs staff) {
 
 		getStaffs().add(staff);
@@ -320,5 +359,7 @@ public class Store implements java.io.Serializable {
 		return order;
 
 	}
+=======
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 
 }

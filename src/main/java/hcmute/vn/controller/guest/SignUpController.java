@@ -31,7 +31,7 @@ public class SignUpController extends HttpServlet {
 
 			throws ServletException, IOException {
 
-		request.getRequestDispatcher("/views/user/sign_up.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/user-template/bodyContent/sign_up.jsp").forward(request, response);
 
 	}
 

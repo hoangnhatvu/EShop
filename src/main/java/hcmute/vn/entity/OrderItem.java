@@ -26,24 +26,37 @@ public class OrderItem implements java.io.Serializable {
 	private int count;
 	private Date createAt;
 	private Date updateAt;
+	private Store store;
+	private int amountFromStore;
+	private int amountToStore;
+	private int amountToGd;
 
 	public OrderItem() {
 	}
 
-	public OrderItem(Orders orders, Product product, Style style, int count) {
-		this.orders = orders;
+	public OrderItem(Product product, int count, Store store, int amountFromStore, int amountToStore,
+					 int amountToGd) {
 		this.product = product;
-		this.style = style;
 		this.count = count;
+		this.store = store;
+		this.amountFromStore = amountFromStore;
+		this.amountToStore = amountToStore;
+		this.amountToGd = amountToGd;
+		this.createAt = new Date();
 	}
 
-	public OrderItem(Orders orders, Product product, Style style, int count, Date createAt, Date updateAt) {
+	public OrderItem(Orders orders, Product product, Style style, int count, Date createAt, Date updateAt,Store store, int amountFromStore,
+					 int amountToStore, int amountToGd) {
 		this.orders = orders;
 		this.product = product;
 		this.style = style;
 		this.count = count;
 		this.createAt = createAt;
 		this.updateAt = updateAt;
+		this.store = store;
+		this.amountFromStore = amountFromStore;
+		this.amountToStore = amountToStore;
+		this.amountToGd = amountToGd;
 	}
 
 	@Id
@@ -115,6 +128,43 @@ public class OrderItem implements java.io.Serializable {
 
 	public void setUpdateAt(Date updateAt) {
 		this.updateAt = updateAt;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "store_id", nullable = false)
+	public Store getStore() {
+		return this.store;
+	}
+
+	public void setStore(Store store) {
+		this.store = store;
+	}
+
+	@Column(name = "amountFromStore", nullable = false, precision = 5)
+	public int getAmountFromStore() {
+		return this.amountFromStore;
+	}
+
+	public void setAmountFromStore(int amountFromStore) {
+		this.amountFromStore = amountFromStore;
+	}
+
+	@Column(name = "amountToStore", nullable = false, precision = 5)
+	public int getAmountToStore() {
+		return this.amountToStore;
+	}
+
+	public void setAmountToStore(int amountToStore) {
+		this.amountToStore = amountToStore;
+	}
+
+	@Column(name = "amountToGD", nullable = false, precision = 5)
+	public int getAmountToGd() {
+		return this.amountToGd;
+	}
+
+	public void setAmountToGd(int amountToGd) {
+		this.amountToGd = amountToGd;
 	}
 
 }

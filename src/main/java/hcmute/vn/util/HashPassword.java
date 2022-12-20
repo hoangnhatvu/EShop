@@ -5,6 +5,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class HashPassword {
 	
+
 	public String hash(String passwordToHash) {		
 		String generatedPassword = null;
 		try {
@@ -29,5 +30,7 @@ public class HashPassword {
 		}
 		return generatedPassword;
 	}
+	
+	
 	
 }

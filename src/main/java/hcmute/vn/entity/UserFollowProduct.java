@@ -30,11 +30,11 @@ public class UserFollowProduct implements java.io.Serializable {
 	public UserFollowProduct() {
 	}
 
-	public UserFollowProduct(Product product, Users users, Date createAt, Date updateAt) {
+	public UserFollowProduct(Product product, Users users) {
 		this.product = product;
 		this.users = users;
-		this.createAt = createAt;
-		this.updateAt = updateAt;
+		this.createAt = new Date();
+		this.updateAt = new Date();
 	}
 
 	@Id

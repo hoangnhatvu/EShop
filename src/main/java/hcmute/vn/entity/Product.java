@@ -1,5 +1,9 @@
 package hcmute.vn.entity;
 
+<<<<<<< HEAD
+=======
+import java.io.Serializable;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -24,16 +28,28 @@ public class Product implements java.io.Serializable {
 	private Integer id;
 	private Store store;
 	private String name;
+<<<<<<< HEAD
 	private String slug; 
 	private String desciption;
 	private Integer price;
 	private Integer promotionalPrice;
 	private Integer quantity;
+=======
+	private String slug;
+	private String desciption;
+	private int price;
+	private int promotionalPrice;
+	private int quantity;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private Integer slod;
 	private Boolean isActive;
 	private Boolean isSelling;
 	private String listImage;
+<<<<<<< HEAD
 	private Category category;
+=======
+	private Integer categoryId;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private String styleValueIds;
 	private Integer rating;
 	private Date createAt;
@@ -51,8 +67,13 @@ public class Product implements java.io.Serializable {
 		this.updateAt = new Date();
 	}
 
+<<<<<<< HEAD
 	public Product(String name, String desciption, Integer price, Integer promotionalPrice,
 			Integer quantity) {
+=======
+	public Product(String name, String desciption, int price, int promotionalPrice,
+			int quantity) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
@@ -60,11 +81,19 @@ public class Product implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
+<<<<<<< HEAD
 	public Product(Store store, String name, String slug, String desciption, Integer price,
 			Integer promotionalPrice, Integer quantity, Integer slod, Boolean isActive, Boolean isSelling,
 			String listImage, Category category, String styleValueIds, Integer rating, Date createAt,
 			Date updateAt, List<UserFollowProduct> userFollowProducts, List<CartItem> cartItems,
 			List<OrderItem> orderItems) {
+=======
+	public Product(Store store, String name, String slug, String desciption, int price,
+			int promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
+			String listImage, Integer categoryId, String styleValueIds, Integer rating, Date createAt,
+			Date updateAt, Set<UserFollowProduct> userFollowProducts, Set<CartItem> cartItems,
+			Set<OrderItem> orderItems) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.store = store;
 		this.name = name;
 		this.slug = slug;
@@ -136,20 +165,36 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "price", nullable = false, precision = 10)
+<<<<<<< HEAD
 	public Integer getPrice() {
+=======
+	public int getPrice() {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		return this.price;
 	}
 
+<<<<<<< HEAD
 	public void setPrice(Integer price) {
+=======
+	public void setPrice(int price) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.price = price;
 	}
 
 	@Column(name = "promotionalPrice", nullable = false, precision = 10)
+<<<<<<< HEAD
 	public Integer getPromotionalPrice() {
+=======
+	public int getPromotionalPrice() {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		return this.promotionalPrice;
 	}
 
+<<<<<<< HEAD
 	public void setPromotionalPrice(Integer promotionalPrice) {
+=======
+	public void setPromotionalPrice(int promotionalPrice) {
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.promotionalPrice = promotionalPrice;
 	}
 

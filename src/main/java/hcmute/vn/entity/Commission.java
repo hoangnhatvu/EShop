@@ -2,9 +2,9 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,25 +28,25 @@ import javax.persistence.UniqueConstraint;
 public class Commission implements java.io.Serializable {
 
 	private Integer id;
-	private Serializable name;
-	private BigDecimal cost;
-	private Serializable description;
+	private String name;
+	private int cost;
+	private String description;
 	private Boolean isDeleted;
 	private Date createAt;
 	private Date updateAt;
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private List<Orders> orderses = null;
 
 	public Commission() {
 	}
 
-	public Commission(Serializable name, BigDecimal cost, Serializable description) {
+	public Commission(String name, int cost, String description) {
 		this.name = name;
 		this.cost = cost;
 		this.description = description;
 	}
 
-	public Commission(Serializable name, BigDecimal cost, Serializable description, Boolean isDeleted, Date createAt,
-			Date updateAt, Set<Orders> orderses) {
+	public Commission(String name, int cost, String description, Boolean isDeleted, Date createAt,
+			Date updateAt, List<Orders> orderses) {
 		this.name = name;
 		this.cost = cost;
 		this.description = description;
@@ -68,29 +69,29 @@ public class Commission implements java.io.Serializable {
 	}
 
 	@Column(name = "name", unique = true, nullable = false)
-	public Serializable getName() {
+	public String getName() {
 		return this.name;
 	}
 
-	public void setName(Serializable name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
 	@Column(name = "cost", unique = true, nullable = false, precision = 10)
-	public BigDecimal getCost() {
+	public int getCost() {
 		return this.cost;
 	}
 
-	public void setCost(BigDecimal cost) {
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
 
 	@Column(name = "description", nullable = false)
-	public Serializable getDescription() {
+	public String getDescription() {
 		return this.description;
 	}
 
-	public void setDescription(Serializable description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -124,11 +125,11 @@ public class Commission implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "commission")
-	public Set<Orders> getOrderses() {
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 

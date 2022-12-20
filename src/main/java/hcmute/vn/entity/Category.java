@@ -1,13 +1,23 @@
 package hcmute.vn.entity;
 
+<<<<<<< HEAD
 import java.util.Date;
 import java.util.List;
+=======
+import java.io.Serializable;
+import java.util.*;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+<<<<<<< HEAD
+=======
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,13 +27,28 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name = "Category", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
+<<<<<<< HEAD
 @NamedQuery(name = "Category.findAll", query = "SELECT b FROM Category b")
 
+=======
+@NamedQuery(name = "Category.findAll", query = "SELECT c FROM Category c")
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 public class Category implements java.io.Serializable {
 
+<<<<<<< HEAD
 	private static final long serialVersionUID = 1L;
 	
+=======
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private Integer id;
+<<<<<<< HEAD
+=======
+	private Category category;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 	private String name;
 	private String image;
 	private Boolean isDeleted;
@@ -39,8 +64,14 @@ public class Category implements java.io.Serializable {
 		this.name = name;
 	}
 
+<<<<<<< HEAD
 	public Category(String name, String image, Boolean isDeleted, Date createAt,
 			Date updateAt, List<Style> styles, List<Product> products) {
+=======
+	public Category(Category category, String name, String image, Boolean isDeleted, Date createAt,
+			Date updateAt, Set<Category> categories, Set<Style> styles) {
+		this.category = category;
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 		this.name = name;
 		this.image = image;
 		this.isDeleted = isDeleted;

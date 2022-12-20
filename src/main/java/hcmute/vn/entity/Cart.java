@@ -3,6 +3,7 @@ package hcmute.vn.entity;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +30,7 @@ public class Cart implements java.io.Serializable {
 	private Users users;
 	private Date createAt;
 	private Date updateAt;
-	private Set<CartItem> cartItems = new HashSet<CartItem>(0);
+	private List<CartItem> cartItems;
 
 	public Cart() {
 	}
@@ -39,7 +40,12 @@ public class Cart implements java.io.Serializable {
 		this.users = users;
 	}
 
-	public Cart(Store store, Users users, Date createAt, Date updateAt, Set<CartItem> cartItems) {
+	public Cart(Users users) {
+		this.users = users;
+		this.createAt = new Date();
+	}
+
+	public Cart(Store store, Users users, Date createAt, Date updateAt, List<CartItem> cartItems) {
 		this.store = store;
 		this.users = users;
 		this.createAt = createAt;
@@ -100,12 +106,21 @@ public class Cart implements java.io.Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "cart")
-	public Set<CartItem> getCartItems() {
+	public List<CartItem> getCartItems() {
 		return this.cartItems;
 	}
 
-	public void setCartItems(Set<CartItem> cartItems) {
+	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
 	}
-
+	public CartItem addCartItem(CartItem cartItem) {
+		getCartItems().add(cartItem);
+		cartItem.setCart(this);
+		return cartItem;
+	}
+	public CartItem removeCartItem(CartItem cartItem) {
+		getCartItems().remove(cartItem);
+		cartItem.setCart(null);
+		return cartItem;
+	}
 }

@@ -1,30 +1,29 @@
 package hcmute.vn.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+<<<<<<< HEAD
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+=======
+import java.util.Set;
+import javax.persistence.*;
+
+>>>>>>> branch 'master' of https://github.com/hoangnhatvu/EShop.git
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Users", schema = "dbo", catalog = "EShop", uniqueConstraints = { @UniqueConstraint(columnNames = "slug"),
-		@UniqueConstraint(columnNames = "email") })
+@Table(name = "Users", schema = "dbo", catalog = "EShop", uniqueConstraints = { @UniqueConstraint(columnNames = "slug"), @UniqueConstraint(columnNames = "email") })
+@NamedQuery(name = "Users.findAll", query = "SELECT U FROM Users U")
+
 public class Users implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -44,7 +43,7 @@ public class Users implements Serializable {
 	private String avatar;
 	private String cover;
 	private Integer point;
-	private BigDecimal EWallet;
+	private int EWallet;
 	private Date createAt;
 	private Date updateAt;
 	private List<Transactions> transactionses;
@@ -73,7 +72,7 @@ public class Users implements Serializable {
 
 	public Users(String firstName, String lastName, String slug, String idCard,
 			String email, String phone, Boolean isEmailActive, Boolean isPhoneActive, String hashedPassword,
-			Integer role, String addresses, String avatar, String cover, Integer point, BigDecimal EWallet,
+			Integer role, String addresses, String avatar, String cover, Integer point, int EWallet,
 			Date createAt, Date updateAt, List<Transactions> transactionses, List<UserFollowProduct> userFollowProducts,
 			List<Cart> carts, List<Orders> orderses, List<Store> stores, List<UserFollowStore> userFollowStores,
 			UserLevel userLevel) {
@@ -245,11 +244,11 @@ public class Users implements Serializable {
 	}
 
 	@Column(name = "e_wallet", precision = 10)
-	public BigDecimal getEWallet() {
+	public int getEWallet() {
 		return this.EWallet;
 	}
 
-	public void setEWallet(BigDecimal EWallet) {
+	public void setEWallet(int EWallet) {
 		this.EWallet = EWallet;
 	}
 
@@ -364,5 +363,26 @@ public class Users implements Serializable {
 		return store;
 
 	}
+	public UserFollowStore addUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().add(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
 
+	public UserFollowStore removeUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().remove(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
+	public UserFollowProduct addUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().add(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
+
+	public UserFollowProduct removeUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().remove(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
 }
