@@ -100,8 +100,7 @@
 
 
 							<div class="mb-3">
-								<label for="productname" class="form-label">Email: </label> 
-								<input
+								<label for="productname" class="form-label">Email: </label> <input
 									type="text" name="email" class="form-control"
 									value="${user.email}" aria-describedby="productName"
 									placeholder="Enter user's email">
@@ -195,7 +194,7 @@
 							<!-- Lưu biến source image -->
 							<input type="text" name="avatar" class="form-control"
 								value="${user.avatar}" aria-describedby="productImage"
-								readonly="true" hidden>
+								readonly="true" >
 							<!-- Lưu biến firstname -->
 							<input type="text" name="firstName" class="form-control"
 								value="${user.firstName}" aria-describedby="productImage"

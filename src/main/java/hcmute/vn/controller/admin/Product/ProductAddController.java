@@ -56,6 +56,10 @@ public class ProductAddController extends HttpServlet {
 
 			BeanUtils.populate(product, req.getParameterMap());
 
+			// tao slug random
+
+			product.setSlug(String.valueOf(Math.random()));
+
 			// xử lý hình ảnh
 
 			String oldImage = req.getParameter("listImage");

@@ -48,7 +48,7 @@
 
 								<tr>
 
-									<th text-center>STT</th>
+									<th class ="text-center">STT</th>
 
 									<th class="text-center">Product Name</th>
 

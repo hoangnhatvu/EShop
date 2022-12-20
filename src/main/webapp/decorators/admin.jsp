@@ -36,15 +36,28 @@
 	type="text/css">
 <link href="${URL}/css/boostrap.min.css" rel="stylesheet">
 
-<%@ include file="/common/admin/header.jsp"%>
+<title>	admin
+</title>
+
 </head>
 
 
 <body>
+	<%@ include file="/common/admin/header.jsp"%>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-3">
+				<%@ include file="/common/admin/left.jsp"%>
+			</div>
+			<div class="col-sm-9 ">
+				<decorator:body />
+			</div>
+		</div>
+	</div>
+	
+	<%@ include file="/common/admin/footer.jsp"%>
 
 
-
-	<decorator:body />
 
 	<!-- JS -->
 

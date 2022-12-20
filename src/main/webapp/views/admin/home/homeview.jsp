@@ -9,7 +9,5 @@
 <title>HTML Elements Reference</title>
 </head>
 <body>
-
-
 </body>
 </html>

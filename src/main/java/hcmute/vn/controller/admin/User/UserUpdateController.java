@@ -44,7 +44,7 @@ public class UserUpdateController extends HttpServlet {
 			Users user = userService.findById(Integer.parseInt(userId));
 
 			// thông báo
-			
+
 			req.setAttribute("action", "update");
 
 			req.setAttribute("user", user);
@@ -77,7 +77,12 @@ public class UserUpdateController extends HttpServlet {
 
 			user.setSlug(String.valueOf(Math.random()));
 
-			String oldImage = req.getParameter("listImage");
+			// them role
+			String role = req.getParameter("role");
+
+			user.setRole(Integer.parseInt(role));
+
+			String oldImage = req.getParameter("avatar");
 
 			// xử lý hình ảnh
 
@@ -96,7 +101,6 @@ public class UserUpdateController extends HttpServlet {
 				System.out.println(oldImage);
 				user.setAvatar(oldImage);
 			}
-
 			userService.update(user);
 
 			// thông báoF

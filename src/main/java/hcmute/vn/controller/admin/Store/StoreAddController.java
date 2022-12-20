@@ -1,6 +1,8 @@
 package hcmute.vn.controller.admin.Store;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 
@@ -72,12 +75,25 @@ public class StoreAddController extends HttpServlet {
 			BeanUtils.populate(store, req.getParameterMap());
 
 			// xử lý hình ảnh
+			String oldImage = req.getParameter("avatar");
 
-			String fileName = String.valueOf(store.getId()) + System.currentTimeMillis();
+			// xử lý hình ảnh
 
-			store.setAvatar(UploadUtils.processUpload("listImage", req, Constant.DIR + "\\category\\", fileName));
-
-			// gọi hàm insert để thêm dữ liệu
+			try {
+				Part part = req.getPart("avatar");
+				String realPath = req.getServletContext().getRealPath("/uploads");
+				String filename = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+				if (!Files.exists(Paths.get(realPath))) {
+					Files.createDirectory(Paths.get(realPath));
+				}
+				part.write(realPath + "/" + filename);
+				String newImage = "/uploads/" + filename;
+				System.out.println(newImage);
+				store.setAvatar(newImage);
+			} catch (Exception e) {
+				System.out.println(oldImage);
+				store.setAvatar(oldImage);
+			}
 
 			storeService.insert(store);
 

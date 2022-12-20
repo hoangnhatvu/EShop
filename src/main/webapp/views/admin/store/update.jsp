@@ -115,11 +115,11 @@
 									value="${store.avatar}" placeholder="Enter photo">
 							</div>
 
-							<c:if test="${store.id == null }">
+							<c:if test="${store.id == 0 }">
 								<button type="submit" class="btn btn-primary">Add</button>
 							</c:if>
 
-							<c:if test="${store.id != null }">
+							<c:if test="${store.id != 0 }">
 								<button type="submit" class="btn btn-primary">Update</button>
 							</c:if>
 
@@ -132,7 +132,7 @@
 
 
 							<!-- Lưu biến source image -->
-							<input type="text" name="avatar" class="form-control"
+							<input type="text" name="avatars" class="form-control"
 								value="${store.avatar}" aria-describedby="productImage"
 								readonly="true" hidden>
 

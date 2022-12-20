@@ -71,7 +71,8 @@
 									<tr>
 
 										<td><p class="text-center">${STT.index+1}</p></td>
-										<td><img class ="mx-auto d-block" height="200" width="200" src="${store.avatar}" /></td>
+										<td><img height="200" width="200"
+											src="<c:url value="${store.avatar}"/>" /></td>
 										<td><p class="text-center">${store.name}</p></td>
 
 										<td><p class="text-center">${store.bio}</p></td>
