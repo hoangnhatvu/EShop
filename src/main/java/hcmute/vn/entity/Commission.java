@@ -2,7 +2,7 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.int;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -30,7 +30,7 @@ public class Commission implements java.io.Serializable {
 
 	private Integer id;
 	private String name;
-	private BigDecimal cost;
+	private int cost;
 	private String description;
 	private Boolean isDeleted;
 	private Date createAt;
@@ -40,13 +40,13 @@ public class Commission implements java.io.Serializable {
 	public Commission() {
 	}
 
-	public Commission(String name, BigDecimal cost, String description) {
+	public Commission(String name, int cost, String description) {
 		this.name = name;
 		this.cost = cost;
 		this.description = description;
 	}
 
-	public Commission(String name, BigDecimal cost, String description, Boolean isDeleted, Date createAt,
+	public Commission(String name, int cost, String description, Boolean isDeleted, Date createAt,
 			Date updateAt, List<Orders> orderses) {
 		this.name = name;
 		this.cost = cost;
@@ -79,11 +79,11 @@ public class Commission implements java.io.Serializable {
 	}
 
 	@Column(name = "cost", unique = true, nullable = false, precision = 10)
-	public BigDecimal getCost() {
+	public int getCost() {
 		return this.cost;
 	}
 
-	public void setCost(BigDecimal cost) {
+	public void setCost(int cost) {
 		this.cost = cost;
 	}
 

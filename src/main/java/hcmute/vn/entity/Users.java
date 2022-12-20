@@ -1,7 +1,7 @@
 package hcmute.vn.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.int;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +36,7 @@ public class Users implements Serializable {
 	private String avatar;
 	private String cover;
 	private Integer point;
-	private BigDecimal EWallet;
+	private int EWallet;
 	private Date createAt;
 	private Date updateAt;
 	private List<Transactions> transactionses;
@@ -64,7 +64,7 @@ public class Users implements Serializable {
 
 	public Users(String firstName, String lastName, String slug, String idCard,
 			String email, String phone, Boolean isEmailActive, Boolean isPhoneActive, String hashedPassword,
-			Integer role, String addresses, String avatar, String cover, Integer point, BigDecimal EWallet,
+			Integer role, String addresses, String avatar, String cover, Integer point, int EWallet,
 			Date createAt, Date updateAt, List<Transactions> transactionses, List<UserFollowProduct> userFollowProducts,
 			List<Cart> carts, List<Orders> orderses, List<Store> stores, List<UserFollowStore> userFollowStores,
 			UserLevel userLevel) {
@@ -236,11 +236,11 @@ public class Users implements Serializable {
 	}
 
 	@Column(name = "e_wallet", precision = 10)
-	public BigDecimal getEWallet() {
+	public int getEWallet() {
 		return this.EWallet;
 	}
 
-	public void setEWallet(BigDecimal EWallet) {
+	public void setEWallet(int EWallet) {
 		this.EWallet = EWallet;
 	}
 

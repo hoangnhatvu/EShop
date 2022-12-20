@@ -2,7 +2,7 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.math.int;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,8 +32,8 @@ public class Product implements java.io.Serializable {
 	private String name;
 	private String slug;
 	private String desciption;
-	private BigDecimal price;
-	private BigDecimal promotionalPrice;
+	private int price;
+	private int promotionalPrice;
 	private int quantity;
 	private Integer slod;
 	private Boolean isActive;
@@ -51,7 +51,7 @@ public class Product implements java.io.Serializable {
 	public Product() {
 	}
 
-	public Product(String name, String desciption, BigDecimal price, BigDecimal promotionalPrice,
+	public Product(String name, String desciption, int price, int promotionalPrice,
 			int quantity) {
 		this.name = name;
 		this.desciption = desciption;
@@ -60,8 +60,8 @@ public class Product implements java.io.Serializable {
 		this.quantity = quantity;
 	}
 
-	public Product(Store store, String name, String slug, String desciption, BigDecimal price,
-			BigDecimal promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
+	public Product(Store store, String name, String slug, String desciption, int price,
+			int promotionalPrice, int quantity, Integer slod, Boolean isActive, Boolean isSelling,
 			String listImage, Integer categoryId, String styleValueIds, Integer rating, Date createAt,
 			Date updateAt, Set<UserFollowProduct> userFollowProducts, Set<CartItem> cartItems,
 			Set<OrderItem> orderItems) {
@@ -136,20 +136,20 @@ public class Product implements java.io.Serializable {
 	}
 
 	@Column(name = "price", nullable = false, precision = 10)
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return this.price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
 	@Column(name = "promotionalPrice", nullable = false, precision = 10)
-	public BigDecimal getPromotionalPrice() {
+	public int getPromotionalPrice() {
 		return this.promotionalPrice;
 	}
 
-	public void setPromotionalPrice(BigDecimal promotionalPrice) {
+	public void setPromotionalPrice(int promotionalPrice) {
 		this.promotionalPrice = promotionalPrice;
 	}
 

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.List;
 
 @WebServlet(urlPatterns ={"/cart", "/cart/delete", "/cart/updateQuantity", "/cart/checkout"})
@@ -83,21 +82,19 @@ public class CartController extends HttpServlet {
                 int phone = Integer.parseInt(request.getParameter("phone"));
 
                 Cart cart = cartService.findCartByUserId(userId);
-                BigDecimal total = new BigDecimal(0);
+                int total = 0;
                 //tinh tong tien
                 for (CartItem cartItem : cart.getCartItems()){
-                    total = total.add(cartItem.getProduct().getPrice().multiply(new BigDecimal(cartItem.getCount())));
+                    total = total + (cartItem.getProduct().getPrice() *(cartItem.getCount()));
                 }
-                BigDecimal amount = total.add(comm.getCost().add(BigDecimal.valueOf(deli.getPrice())));
+                int amount = total + (comm.getCost()*(deli.getPrice()));
                 //tạo order
                 Orders orders = new Orders(comm, deli, user, address, phone, amount);
                 orderService.insert(orders);
                 //thêm orderitem vào order
                 for (CartItem cartItem : cart.getCartItems()){
                     OrderItem orderItem = new OrderItem(cartItem.getProduct(), cartItem.getCount(), cartItem.getProduct().getStore(),
-                            cartItem.getProduct().getPrice().multiply(new BigDecimal(0.04)),
-                            cartItem.getProduct().getPrice().multiply(new BigDecimal(0.9)),
-                            cartItem.getProduct().getPrice().multiply(new BigDecimal(0.06)));
+                            4, cartItem.getProduct().getPrice() - 10, 3);
                     orderItemService.insert(orders.addOrderItem(orderItem));
                 }
                 //xoa cartitem khoi cart

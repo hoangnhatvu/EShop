@@ -2,7 +2,6 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.*;
 import javax.persistence.*;
 
@@ -25,10 +24,10 @@ public class Orders implements java.io.Serializable {
 	private int phone;
 	private String status;
 	private Boolean idPaidBefore;
-	private BigDecimal amountFromUser;
-	private BigDecimal amountFromStore;
-	private BigDecimal amountToStore;
-	private BigDecimal amountToGd;
+	private int amountFromUser;
+	private int amountFromStore;
+	private int amountToStore;
+	private int amountToGd;
 	private Date createAt;
 	private Date updateAt;
 	private List<OrderItem> orderItems = new ArrayList<>();
@@ -39,8 +38,8 @@ public class Orders implements java.io.Serializable {
 	}
 
 	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
-			String status, BigDecimal amountFromUser, BigDecimal amountFromStore, BigDecimal amountToStore,
-			BigDecimal amountToGd) {
+			String status, int amountFromUser, int amountFromStore, int amountToStore,
+			int amountToGd) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.store = store;
@@ -54,7 +53,7 @@ public class Orders implements java.io.Serializable {
 		this.amountToGd = amountToGd;
 	}
 
-	public Orders(Commission commission, Delivery delivery, Users users, String address, int phone, BigDecimal amountFromUser) {
+	public Orders(Commission commission, Delivery delivery, Users users, String address, int phone, int amountFromUser) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.users = users;
@@ -66,8 +65,8 @@ public class Orders implements java.io.Serializable {
 	}
 
 	public Orders(Commission commission, Delivery delivery, Store store, Users users, String address, int phone,
-			String status, Boolean idPaidBefore, BigDecimal amountFromUser, BigDecimal amountFromStore,
-			BigDecimal amountToStore, BigDecimal amountToGd, Date createAt, Date updateAt, List<OrderItem> orderItems) {
+			String status, Boolean idPaidBefore, int amountFromUser, int amountFromStore,
+			int amountToStore, int amountToGd, Date createAt, Date updateAt, List<OrderItem> orderItems) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.store = store;
@@ -86,7 +85,7 @@ public class Orders implements java.io.Serializable {
 	}
 
 	public Orders(Commission commission, Delivery delivery, Users users, String address, int phone,
-				  String status, Boolean idPaidBefore, BigDecimal amountFromUser, List<OrderItem> orderItems) {
+				  String status, Boolean idPaidBefore, int amountFromUser, List<OrderItem> orderItems) {
 		this.commission = commission;
 		this.delivery = delivery;
 		this.users = users;
@@ -188,38 +187,38 @@ public class Orders implements java.io.Serializable {
 	}
 
 	@Column(name = "amountFromUser", nullable = false, precision = 5)
-	public BigDecimal getAmountFromUser() {
+	public int getAmountFromUser() {
 		return this.amountFromUser;
 	}
 
-	public void setAmountFromUser(BigDecimal amountFromUser) {
+	public void setAmountFromUser(int amountFromUser) {
 		this.amountFromUser = amountFromUser;
 	}
 
 	@Column(name = "amountFromStore", nullable = false, precision = 5)
-	public BigDecimal getAmountFromStore() {
+	public int getAmountFromStore() {
 		return this.amountFromStore;
 	}
 
-	public void setAmountFromStore(BigDecimal amountFromStore) {
+	public void setAmountFromStore(int amountFromStore) {
 		this.amountFromStore = amountFromStore;
 	}
 
 	@Column(name = "amountToStore", nullable = false, precision = 5)
-	public BigDecimal getAmountToStore() {
+	public int getAmountToStore() {
 		return this.amountToStore;
 	}
 
-	public void setAmountToStore(BigDecimal amountToStore) {
+	public void setAmountToStore(int amountToStore) {
 		this.amountToStore = amountToStore;
 	}
 
 	@Column(name = "amountToGD", nullable = false, precision = 5)
-	public BigDecimal getAmountToGd() {
+	public int getAmountToGd() {
 		return this.amountToGd;
 	}
 
-	public void setAmountToGd(BigDecimal amountToGd) {
+	public void setAmountToGd(int amountToGd) {
 		this.amountToGd = amountToGd;
 	}
 

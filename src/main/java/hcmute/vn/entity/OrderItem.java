@@ -1,7 +1,7 @@
 package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
-import java.math.BigDecimal;
+import java.math.int;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,15 +30,15 @@ public class OrderItem implements java.io.Serializable {
 	private Date createAt;
 	private Date updateAt;
 	private Store store;
-	private BigDecimal amountFromStore;
-	private BigDecimal amountToStore;
-	private BigDecimal amountToGd;
+	private int amountFromStore;
+	private int amountToStore;
+	private int amountToGd;
 
 	public OrderItem() {
 	}
 
-	public OrderItem(Product product, int count, Store store, BigDecimal amountFromStore, BigDecimal amountToStore,
-					 BigDecimal amountToGd) {
+	public OrderItem(Product product, int count, Store store, int amountFromStore, int amountToStore,
+					 int amountToGd) {
 		this.product = product;
 		this.count = count;
 		this.store = store;
@@ -48,8 +48,8 @@ public class OrderItem implements java.io.Serializable {
 		this.createAt = new Date();
 	}
 
-	public OrderItem(Orders orders, Product product, Style style, int count, Date createAt, Date updateAt,Store store, BigDecimal amountFromStore,
-					 BigDecimal amountToStore, BigDecimal amountToGd) {
+	public OrderItem(Orders orders, Product product, Style style, int count, Date createAt, Date updateAt,Store store, int amountFromStore,
+					 int amountToStore, int amountToGd) {
 		this.orders = orders;
 		this.product = product;
 		this.style = style;
@@ -144,29 +144,29 @@ public class OrderItem implements java.io.Serializable {
 	}
 
 	@Column(name = "amountFromStore", nullable = false, precision = 5)
-	public BigDecimal getAmountFromStore() {
+	public int getAmountFromStore() {
 		return this.amountFromStore;
 	}
 
-	public void setAmountFromStore(BigDecimal amountFromStore) {
+	public void setAmountFromStore(int amountFromStore) {
 		this.amountFromStore = amountFromStore;
 	}
 
 	@Column(name = "amountToStore", nullable = false, precision = 5)
-	public BigDecimal getAmountToStore() {
+	public int getAmountToStore() {
 		return this.amountToStore;
 	}
 
-	public void setAmountToStore(BigDecimal amountToStore) {
+	public void setAmountToStore(int amountToStore) {
 		this.amountToStore = amountToStore;
 	}
 
 	@Column(name = "amountToGD", nullable = false, precision = 5)
-	public BigDecimal getAmountToGd() {
+	public int getAmountToGd() {
 		return this.amountToGd;
 	}
 
-	public void setAmountToGd(BigDecimal amountToGd) {
+	public void setAmountToGd(int amountToGd) {
 		this.amountToGd = amountToGd;
 	}
 
