@@ -1,7 +1,6 @@
 package hcmute.vn.entity;
 
 import java.io.Serializable;
-import java.math.int;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
