@@ -14,6 +14,17 @@ public class UserServiceImpl implements IUserService{
 	}
 	
 	@Override
+	public void update(Users user) {
+		userDao.update(user);		
+	}
+	
+	@Override
+	public void delete(int userid) throws Exception {
+
+		userDao.delete(userid);
+	}
+	
+	@Override
 	public Users findByEmail(String email) {
 		return userDao.findByEmail(email);
 	}

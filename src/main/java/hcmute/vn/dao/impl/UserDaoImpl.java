@@ -39,6 +39,76 @@ public class UserDaoImpl implements IUserDao {
 
 	}
 	
+	public void update(Users user) {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			enma.merge(user);
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+	
+	public void delete(int userid) throws Exception {
+
+		EntityManager enma = JPAConfig.getEntityManager();
+
+		EntityTransaction trans = enma.getTransaction();
+
+		try {
+
+			trans.begin();
+
+			Users user = enma.find(Users.class, userid);
+
+			if (user != null) {
+
+				enma.remove(user);
+
+			} else {
+
+				throw new Exception("Không tìm thấy");
+
+			}
+
+			trans.commit();
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+			trans.rollback();
+
+			throw e;
+
+		} finally {
+
+			enma.close();
+
+		}
+
+	}
+	
 	public Users findByEmail(String email) {
 
 		EntityManager enma = JPAConfig.getEntityManager();

@@ -22,7 +22,7 @@ import hcmute.vn.util.Constant;
 import hcmute.vn.util.UploadUtils;
 
 @MultipartConfig
-@WebServlet(urlPatterns = {"/vendor/store/add"})
+@WebServlet(urlPatterns = {"/vendor/store-add"})
 public class StoreAddController extends HttpServlet{
 	
 	private static final long serialVersionUID = 1L;
@@ -33,7 +33,7 @@ public class StoreAddController extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/views/vendor/add-store.jsp").forward(request, response);		
+		request.getRequestDispatcher("/views/vendor/add_store.jsp").forward(request, response);		
 	}
 
 	@Override
@@ -49,8 +49,6 @@ public class StoreAddController extends HttpServlet{
 			
 			String ownerId = (String)session.getAttribute("ownerId");
 			
-			System.out.println(ownerId);
-
 			// khỏi tạo đối tượng Model
 
 			Store store = new Store();
@@ -77,7 +75,7 @@ public class StoreAddController extends HttpServlet{
 			
 			request.setAttribute("message", "Đã thêm thành công");
 			
-			response.sendRedirect(request.getContextPath() + "/vendor/store/list");
+			response.sendRedirect(request.getContextPath() + "/vendor/store");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

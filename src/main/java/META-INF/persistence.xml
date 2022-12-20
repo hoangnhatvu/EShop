@@ -23,6 +23,7 @@
 	<class>hcmute.vn.entity.UserFollowStore</class>
 	<class>hcmute.vn.entity.UserLevel</class>
 	<class>hcmute.vn.entity.Users</class>
+	<class>hcmute.vn.entity.Staffs</class>
 	
 		<properties>
 			<property name="javax.persistence.jdbc.url"

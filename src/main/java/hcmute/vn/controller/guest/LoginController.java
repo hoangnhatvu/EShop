@@ -17,7 +17,7 @@ import hcmute.vn.util.HashPassword;
 
 @MultipartConfig
 
-@WebServlet(urlPatterns = { "/login" })
+@WebServlet(urlPatterns = { "/user/login" })
 
 public class LoginController extends HttpServlet {
 
@@ -61,7 +61,7 @@ public class LoginController extends HttpServlet {
 					
 					session.setAttribute("ownerId",user.getId().toString());
 					
-					response.sendRedirect(request.getContextPath() + "/vendor/store/add");
+					response.sendRedirect(request.getContextPath() + "/vendor/home");
 				}
 			}
 

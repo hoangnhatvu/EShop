@@ -3,9 +3,9 @@ package hcmute.vn.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -53,6 +53,7 @@ public class Users implements Serializable {
 	private List<Orders> orderses;
 	private List<Store> stores;
 	private List<UserFollowStore> userFollowStores;
+	private List<Staffs> staffs;
 	private UserLevel userLevel;
 
 	public Users() {
@@ -190,7 +191,7 @@ public class Users implements Serializable {
 
 	@NotEmpty
 	@Column(name = "hashed_password", nullable = false)
-	public Serializable getHashedPassword() {
+	public String getHashedPassword() {
 		return this.hashedPassword;
 	}
 
@@ -208,7 +209,7 @@ public class Users implements Serializable {
 	}
 
 	@Column(name = "addresses")
-	public Serializable getAddresses() {
+	public String getAddresses() {
 		return this.addresses;
 	}
 
@@ -324,6 +325,15 @@ public class Users implements Serializable {
 
 	public void setUserFollowStores(List<UserFollowStore> userFollowStores) {
 		this.userFollowStores = userFollowStores;
+	}
+	
+	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "users")
+	public List<Staffs> getStaffs() {
+		return this.staffs;
+	}
+
+	public void setStaffs(List<Staffs> staffs) {
+		this.staffs = staffs;
 	}
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users")

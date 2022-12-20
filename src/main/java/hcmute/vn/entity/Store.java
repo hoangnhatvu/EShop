@@ -1,8 +1,9 @@
 package hcmute.vn.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,7 +36,7 @@ public class Store implements java.io.Serializable {
 	private Boolean isOpen;
 	private String avatar;
 	private Integer rating;
-	private BigDecimal EWallet;
+	private Integer EWallet;
 	private Date createdAt;
 	private Date updateAt;
 	private List<UserFollowStore> userFollowStores;
@@ -43,6 +44,7 @@ public class Store implements java.io.Serializable {
 	private List<Product> products;
 	private List<Cart> carts;
 	private StoreLevel storeLevel;
+	private List<Staffs> staffs;
 	private List<Transactions> transactionses;
 
 	public Store() {
@@ -59,7 +61,7 @@ public class Store implements java.io.Serializable {
 	}
 
 	public Store(Users users, String name, String bio, Integer staffIds, Boolean isActive, Boolean isOpen,
-			String avatar, Integer rating, BigDecimal EWallet, Date createdAt, Date updateAt,
+			String avatar, Integer rating, Integer EWallet, Date createdAt, Date updateAt, List<Staffs> staffs,
 			List<UserFollowStore> userFollowStores, List<Orders> orderses, List<Product> products, List<Cart> carts,
 			StoreLevel storeLevel, List<Transactions> transactionses) {
 		this.users = users;
@@ -73,6 +75,7 @@ public class Store implements java.io.Serializable {
 		this.EWallet = EWallet;
 		this.createdAt = createdAt;
 		this.updateAt = updateAt;
+		this.staffs = staffs;
 		this.userFollowStores = userFollowStores;
 		this.orderses = orderses;
 		this.products = products;
@@ -167,11 +170,11 @@ public class Store implements java.io.Serializable {
 	}
 
 	@Column(name = "e_wallet", precision = 10)
-	public BigDecimal getEWallet() {
+	public Integer getEWallet() {
 		return this.EWallet;
 	}
 
-	public void setEWallet(BigDecimal EWallet) {
+	public void setEWallet(Integer EWallet) {
 		this.EWallet = EWallet;
 	}
 
@@ -199,12 +202,21 @@ public class Store implements java.io.Serializable {
 	public List<UserFollowStore> getUserFollowStores() {
 		return this.userFollowStores;
 	}
-
+	
 	public void setUserFollowStores(List<UserFollowStore> userFollowStores) {
 		this.userFollowStores = userFollowStores;
 	}
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+	
+	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
+	public List<Staffs> getStaffs() {
+		return this.staffs;
+	}	
+	
+	public void setStaffs(List<Staffs> staffs) {
+		this.staffs = staffs;
+	}
+	
+	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
 	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
@@ -213,7 +225,7 @@ public class Store implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "store")
+	@OneToMany(cascade=CascadeType.REMOVE, fetch = FetchType.LAZY, mappedBy = "store")
 	public List<Product> getProducts() {
 		return this.products;
 	}
@@ -247,6 +259,66 @@ public class Store implements java.io.Serializable {
 
 	public void setTransactionses(List<Transactions> transactionses) {
 		this.transactionses = transactionses;
+	}
+	
+	public Staffs addStaff(Staffs staff) {
+
+		getStaffs().add(staff);
+
+		staff.setStore(this);
+
+		return staff;
+
+	}
+
+	public Staffs removeStaff(Staffs staff) {
+
+		getStaffs().remove(staff);
+
+		staff.setStore(null);
+
+		return staff;
+
+	}
+	
+	public Product addProduct(Product product) {
+
+		getProducts().add(product);
+
+		product.setStore(this);
+
+		return product;
+
+	}
+
+	public Product removeProduct(Product product) {
+
+		getProducts().remove(product);
+
+		product.setStore(null);
+
+		return product;
+
+	}
+	
+	public Orders addOrder(Orders order) {
+
+		getOrderses().add(order);
+
+		order.setStore(this);
+
+		return order;
+
+	}
+
+	public Orders removeOrder(Orders order) {
+
+		getOrderses().remove(order);
+
+		order.setStore(null);
+
+		return order;
+
 	}
 
 }

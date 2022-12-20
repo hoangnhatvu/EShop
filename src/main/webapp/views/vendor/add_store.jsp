@@ -1,34 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="container">
+<div class="container" style="padding-top: 36px;">
 
-	<form action="add" method="post" enctype="multipart/form-data">
+	<form action="store-add" method="post" enctype="multipart/form-data">
 
 		<div class="form-group">
 
-			<label for="name">Store Name:</label> <input type="text"
-				class="form-control" name="name" id="name"/>
+			<label for="name">Tên cửa hàng:</label> <input type="text"
+				class="form-control" name="name" id="name" />
 
 		</div>
 
 		<div class="form-group">
 
-			<label for="bio">Biography:</label> <input type="text"
+			<label for="bio">Mô tả:</label> <input type="text"
 				class="form-control" name="bio" id="bio" />
 
 		</div>
 
 		<div class="form-group">
 
-			<label for="avatar">Avatar:</label> <input type="file"
-				class="form-control" name="avatar" id="avatar"/>
+			<label for="avatar">Ảnh đại diện:</label> <input type="file"
+				class="form-control" name="avatar" id="avatar" />
 
 		</div>
 
 		<div class="form-check form-check-inline">
 
-			<label for="isActive">Status:</label>
+			<label for="isActive">Trạng thái:</label>
 			<div>
 				<input id="statuson" class="form-check-input" type="radio"
 					name="isActive" value="true"> <label for="statuson"
@@ -43,11 +43,11 @@
 
 		</div>
 
-		<div class="form-group">
-
-			<button class="btn-primary" type="submit">Add <i class="fa fa-plus"></i> </button>
-
+		<div class="form-group" style="padding: 18px 0; text-align: center;">
+			<button class="btn btn-secondary" type="submit">
+				Thêm<i class="fa fa-plus"></i>
+			</button>
 		</div>
-		
+
 	</form>
 </div>

@@ -19,7 +19,7 @@ import hcmute.vn.util.StringUtils;
 
 @MultipartConfig
 
-@WebServlet(urlPatterns = { "/sign_up" })
+@WebServlet(urlPatterns = { "/user/sign_up" })
 
 public class SignUpController extends HttpServlet {
 
