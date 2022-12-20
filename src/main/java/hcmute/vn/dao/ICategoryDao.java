@@ -10,10 +10,11 @@ public interface ICategoryDao {
 
 	void delete(int categoryId) throws Exception;
 
-	Category findById(int categoryId);
+	public Category findById(int categoryId);
 
 	void update(Category category);
 
-	List<Category> findAll();
+	public List<Category> findAll();
+	public int countProdByCateId(int cateId);
 
 }

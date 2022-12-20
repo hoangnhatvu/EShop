@@ -2,9 +2,9 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,35 +25,16 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "Commission", schema = "dbo", catalog = "EShop", uniqueConstraints = {
 		@UniqueConstraint(columnNames = "cost"), @UniqueConstraint(columnNames = "name") })
-@NamedQuery(name = "Commission.findAll", query = "SELECT c FROM Commission c")
 public class Commission implements java.io.Serializable {
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
-	private int id;
-	@Column(name = "name", unique = true, nullable = false)
-
+	private Integer id;
 	private String name;
-	@Column(name = "cost", unique = true, nullable = false, precision = 10)
-
 	private int cost;
-	@Column(name = "description", nullable = false)
-
 	private String description;
-	@Column(name = "is_deleted")
-
 	private Boolean isDeleted;
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	private Date createAt;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "commission")
-
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private List<Orders> orderses = null;
 
 	public Commission() {
 	}
@@ -64,8 +45,8 @@ public class Commission implements java.io.Serializable {
 		this.description = description;
 	}
 
-	public Commission(String name, int cost, String description, Boolean isDeleted, Date createAt, Date updateAt,
-			Set<Orders> orderses) {
+	public Commission(String name, int cost, String description, Boolean isDeleted, Date createAt,
+			Date updateAt, List<Orders> orderses) {
 		this.name = name;
 		this.cost = cost;
 		this.description = description;
@@ -75,14 +56,19 @@ public class Commission implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
-	public int getId() {
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
+	@Column(name = "name", unique = true, nullable = false)
 	public String getName() {
 		return this.name;
 	}
@@ -91,6 +77,7 @@ public class Commission implements java.io.Serializable {
 		this.name = name;
 	}
 
+	@Column(name = "cost", unique = true, nullable = false, precision = 10)
 	public int getCost() {
 		return this.cost;
 	}
@@ -99,6 +86,7 @@ public class Commission implements java.io.Serializable {
 		this.cost = cost;
 	}
 
+	@Column(name = "description", nullable = false)
 	public String getDescription() {
 		return this.description;
 	}
@@ -107,6 +95,7 @@ public class Commission implements java.io.Serializable {
 		this.description = description;
 	}
 
+	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -115,6 +104,8 @@ public class Commission implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -123,6 +114,8 @@ public class Commission implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -131,11 +124,12 @@ public class Commission implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	public Set<Orders> getOrderses() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "commission")
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 

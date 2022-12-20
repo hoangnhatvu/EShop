@@ -1,5 +1,6 @@
 package hcmute.vn.service;
 
+
 import java.util.List;
 
 import hcmute.vn.entity.Category;
@@ -12,9 +13,8 @@ public interface ICategoryService {
 
 	void update(Category cate);
 
-	List<Category> findAll();
+	public List<Category> findAll();
 
-	Category findByCateId(int cateId);
-
-
+	public Category findByCateId(int cateId);
+	public int countProdByCateId(int cateId);
 }

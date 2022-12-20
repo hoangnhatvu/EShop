@@ -7,6 +7,7 @@ import hcmute.vn.dao.impl.StoreDaoImpl;
 import hcmute.vn.entity.Store;
 import hcmute.vn.service.IStoreService;
 
+
 public class StoreServiceImpl implements IStoreService{
 	
 	IStoreDao storeDao = new StoreDaoImpl();
@@ -15,10 +16,25 @@ public class StoreServiceImpl implements IStoreService{
 	public void insert(Store store) {
 		storeDao.insert(store);
 	}
-	
+
+	@Override
+	public List<Store> findStoresByName(String searchString) {
+		return storeDao.findStoresByName(searchString);
+	}
+
+	@Override
+	public Store findStoresById(int id) {
+		return storeDao.findStoresById(id);
+	}
+
 	@Override
 	public List<Store> findAll() {
 		return storeDao.findAll();
+	}
+
+	@Override
+	public List<Store> findTopVendor() {
+		return storeDao.findTopVendor();
 	}
 	@Override
 	public Store findbyId(int storeId)

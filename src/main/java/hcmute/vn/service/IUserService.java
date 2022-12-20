@@ -1,12 +1,11 @@
 package hcmute.vn.service;
-
-import java.util.List;
-
 import hcmute.vn.entity.Users;
+import java.util.List;
 
 public interface IUserService {
 	public void createAccount(Users user);
 	public Users findByEmail(String email);
+	public List<Users> findUsersByName(String searchString);
 	public Users findById(int userid);
 	List<Users> findAll();
 	void update(Users user);

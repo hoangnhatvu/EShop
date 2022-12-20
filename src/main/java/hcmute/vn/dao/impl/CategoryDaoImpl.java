@@ -1,5 +1,6 @@
 package hcmute.vn.dao.impl;
 
+
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,8 +12,8 @@ import hcmute.vn.dao.ICategoryDao;
 import hcmute.vn.entity.Category;
 
 public class CategoryDaoImpl implements ICategoryDao{
-	
-	
+
+
 	@Override
 	public List<Category> findAll()
 	{
@@ -21,10 +22,10 @@ public class CategoryDaoImpl implements ICategoryDao{
 		TypedQuery<Category> query = enma.createNamedQuery("Category.findAll", Category.class);
 
 		return query.getResultList();
-		
+
 	}
-	
-	
+
+
 	@Override
 	public void update(Category category) {
 
@@ -55,8 +56,8 @@ public class CategoryDaoImpl implements ICategoryDao{
 		}
 
 	}
-	
-	
+
+
 	@Override
 	public Category findById(int categoryId) {
 
@@ -67,8 +68,8 @@ public class CategoryDaoImpl implements ICategoryDao{
 		return category;
 
 	}
-	
-	
+
+
 	@Override
 	public void delete(int categoryId) throws Exception {
 
@@ -109,7 +110,7 @@ public class CategoryDaoImpl implements ICategoryDao{
 		}
 
 	}
-	
+
 	@Override
 	public void insert(Category category) {
 
@@ -138,7 +139,13 @@ public class CategoryDaoImpl implements ICategoryDao{
 			enma.close();
 
 		}
-
 	}
+
+    @Override
+    public int countProdByCateId(int cateId) {
+        EntityManager enma = JPAConfig.getEntityManager();
+        int count = (int) enma.createQuery("FROM Product P WHERE P.categoryId =: cateId").setParameter("cateId", cateId).getResultList().size();
+        return count;
+    }
 
 }

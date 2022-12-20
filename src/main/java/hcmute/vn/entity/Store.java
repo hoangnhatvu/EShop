@@ -1,6 +1,5 @@
 package hcmute.vn.entity;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -49,7 +48,7 @@ public class Store implements java.io.Serializable {
 	@Column(name = "rating")
 	private int rating;
 	@Column(name = "e_wallet", precision = 10)
-	private BigDecimal EWallet;
+	private int EWallet;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "createdAt", length = 10)
 	private Date createdAt;
@@ -84,7 +83,7 @@ public class Store implements java.io.Serializable {
 	}
 
 	public Store(Users users, String name, String bio, int staffIds, Boolean isActive, Boolean isOpen,
-			String avatar, int rating, BigDecimal EWallet, Date createdAt, Date updateAt,
+			String avatar, int rating, int EWallet, Date createdAt, Date updateAt,
 			List<UserFollowStore> userFollowStores, List<Orders> orderses, List<Product> products, List<Cart> carts,
 			StoreLevel storeLevel, List<Transactions> transactionses) {
 		this.users = users;
@@ -181,11 +180,11 @@ public class Store implements java.io.Serializable {
 		this.rating = rating;
 	}
 
-	public BigDecimal getEWallet() {
+	public int getEWallet() {
 		return this.EWallet;
 	}
 
-	public void setEWallet(BigDecimal EWallet) {
+	public void setEWallet(int EWallet) {
 		this.EWallet = EWallet;
 	}
 

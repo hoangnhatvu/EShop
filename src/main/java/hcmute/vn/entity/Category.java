@@ -2,9 +2,7 @@ package hcmute.vn.entity;
 // Generated Nov 17, 2022, 12:16:28 AM by Hibernate Tools 4.3.6.Final
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -33,32 +31,13 @@ public class Category implements java.io.Serializable {
 
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "category_id")
 	private Category category;
-
-	@Column(name = "name", unique = true, nullable = false)
 	private String name;
-
-	@Column(name = "image")
 	private String image;
-
-	@Column(name = "is_deleted")
 	private Boolean isDeleted;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	private Date createAt;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private Set<Category> categories = new HashSet<Category>(0);
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	private Set<Style> styles = new HashSet<Style>(0);
 
 	public Category() {
@@ -80,6 +59,10 @@ public class Category implements java.io.Serializable {
 		this.styles = styles;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -88,6 +71,8 @@ public class Category implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "category_id")
 	public Category getCategory() {
 		return this.category;
 	}
@@ -96,7 +81,8 @@ public class Category implements java.io.Serializable {
 		this.category = category;
 	}
 
-	public String getName() {
+	@Column(name = "name", unique = true, nullable = false)
+	public Serializable getName() {
 		return this.name;
 	}
 
@@ -104,6 +90,7 @@ public class Category implements java.io.Serializable {
 		this.name = name;
 	}
 
+	@Column(name = "image")
 	public String getImage() {
 		return this.image;
 	}
@@ -112,6 +99,7 @@ public class Category implements java.io.Serializable {
 		this.image = image;
 	}
 
+	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -120,6 +108,8 @@ public class Category implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -128,6 +118,8 @@ public class Category implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -136,6 +128,7 @@ public class Category implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Category> getCategories() {
 		return this.categories;
 	}
@@ -144,6 +137,7 @@ public class Category implements java.io.Serializable {
 		this.categories = categories;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
 	public Set<Style> getStyles() {
 		return this.styles;
 	}

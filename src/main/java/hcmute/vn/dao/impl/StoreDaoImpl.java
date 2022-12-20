@@ -11,6 +11,8 @@ import hcmute.vn.dao.IStoreDao;
 import hcmute.vn.entity.Product;
 import hcmute.vn.entity.Store;
 
+import java.util.List;
+
 
 public class StoreDaoImpl implements IStoreDao {
 	public void insert(Store store) {
@@ -50,7 +52,27 @@ public class StoreDaoImpl implements IStoreDao {
 		return query.getResultList();
 
 	}
-	
+
+	@Override
+	public List<Store> findTopVendor() {
+		EntityManager enma = JPAConfig.getEntityManager();
+		List<Store> stores = (List<Store>) enma.createQuery("FROM Store S ORDER BY S.rating").setMaxResults(6).getResultList();
+		return stores;
+	}
+
+	@Override
+	public List<Store> findStoresByName(String searchString) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		List<Store> stores = (List<Store>) enma.createQuery("FROM Store S WHERE S.name like :name").setParameter("name", "%" + searchString + "%").getResultList();
+		return stores;
+	}
+
+	public Store findStoresById(int id) {
+		EntityManager enma = JPAConfig.getEntityManager();
+		Store store = (Store) enma.createQuery("FROM Store S WHERE S.id =:id").setParameter("id",id).getSingleResult();
+		return store;
+	}
+
 	@Override
 	public Store findById(int storeId) {
 
@@ -61,7 +83,7 @@ public class StoreDaoImpl implements IStoreDao {
 		return store;
 
 	}
-	
+
 	@Override
 	public void update(Store store) {
 
@@ -92,7 +114,7 @@ public class StoreDaoImpl implements IStoreDao {
 		}
 
 	}
-	
+
 	@Override
 	public void delete(int storeId) throws Exception {
 

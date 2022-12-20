@@ -4,6 +4,7 @@ package hcmute.vn.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,33 +26,15 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "Delivery", schema = "dbo", catalog = "EShop", uniqueConstraints = @UniqueConstraint(columnNames = "name"))
 @NamedQuery(name = "Delivery.findAll", query = "SELECT d FROM Delivery d")
 public class Delivery implements java.io.Serializable {
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
 
-	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-
-	@Column(name = "name", unique = true, nullable = false)
-
 	private String name;
-	@Column(name = "desciption", nullable = false)
-
 	private String desciption;
-	@Column(name = "price", nullable = false)
-
 	private int price;
-	@Column(name = "is_deleted")
-
 	private Boolean isDeleted;
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
 	private Date createAt;
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
-
-	private Set<Orders> orderses = new HashSet<Orders>(0);
+	private List<Orders> orderses = null;
 
 	public Delivery() {
 	}
@@ -63,7 +46,7 @@ public class Delivery implements java.io.Serializable {
 	}
 
 	public Delivery(String name, String desciption, int price, Boolean isDeleted, Date createAt,
-			Date updateAt, Set<Orders> orderses) {
+			Date updateAt, List<Orders> orderses) {
 		this.name = name;
 		this.desciption = desciption;
 		this.price = price;
@@ -73,6 +56,10 @@ public class Delivery implements java.io.Serializable {
 		this.orderses = orderses;
 	}
 
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -81,6 +68,7 @@ public class Delivery implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@Column(name = "name", unique = true, nullable = false)
 	public String getName() {
 		return this.name;
 	}
@@ -89,6 +77,7 @@ public class Delivery implements java.io.Serializable {
 		this.name = name;
 	}
 
+	@Column(name = "desciption", nullable = false)
 	public String getDesciption() {
 		return this.desciption;
 	}
@@ -97,6 +86,7 @@ public class Delivery implements java.io.Serializable {
 		this.desciption = desciption;
 	}
 
+	@Column(name = "price", nullable = false)
 	public int getPrice() {
 		return this.price;
 	}
@@ -105,6 +95,7 @@ public class Delivery implements java.io.Serializable {
 		this.price = price;
 	}
 
+	@Column(name = "is_deleted")
 	public Boolean getIsDeleted() {
 		return this.isDeleted;
 	}
@@ -113,6 +104,8 @@ public class Delivery implements java.io.Serializable {
 		this.isDeleted = isDeleted;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -121,6 +114,8 @@ public class Delivery implements java.io.Serializable {
 		this.createAt = createAt;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -129,11 +124,12 @@ public class Delivery implements java.io.Serializable {
 		this.updateAt = updateAt;
 	}
 
-	public Set<Orders> getOrderses() {
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "delivery")
+	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
 
-	public void setOrderses(Set<Orders> orderses) {
+	public void setOrderses(List<Orders> orderses) {
 		this.orderses = orderses;
 	}
 

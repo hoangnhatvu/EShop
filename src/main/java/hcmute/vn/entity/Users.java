@@ -1,122 +1,55 @@
 package hcmute.vn.entity;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
+import javax.persistence.*;
+
 import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Users", schema = "dbo", catalog = "EShop", uniqueConstraints = { @UniqueConstraint(columnNames = "slug"),
-		@UniqueConstraint(columnNames = "email") })
+@Table(name = "Users", schema = "dbo", catalog = "EShop", uniqueConstraints = { @UniqueConstraint(columnNames = "slug"), @UniqueConstraint(columnNames = "email") })
 @NamedQuery(name = "Users.findAll", query = "SELECT U FROM Users U")
+
 public class Users implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
-	
-	@Column(name = "firstName", nullable = false)
 	private String firstName;
-	
-	@Column(name = "lastName", nullable = false)
 	private String lastName;
-	
-	@Column(name = "slug", unique = true)
 	private String slug;
-	
-	@Column(name = "id_card")
 	private String idCard;
-	
-	@Email(message = "Email không hợp lệ")
-	@NotEmpty
-	@Column(name = "email", unique = true)
 	private String email;
-	
-	@Column(name = "phone", length = 30)
 	private String phone;
-	
-	@Column(name = "isEmailActive")
 	private Boolean isEmailActive;
-	
-	@Column(name = "isPhoneActive")
 	private Boolean isPhoneActive;
-	
-	@NotEmpty
-	@Column(name = "hashed_password", nullable = false)
 	private String hashedPassword;
-	
-	@Column(name = "role")
 	private Integer role;
-	
-	@Column(name = "addresses")
 	private String addresses;
-	
-	@Column(name = "avatar", length = 100)
 	private String avatar;
-	
-	@Column(name = "cover", length = 100)
 	private String cover;
-	
-	@Column(name = "point")
 	private Integer point;
-	
-	@Column(name = "e_wallet", precision = 10)
-	private BigDecimal EWallet;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "createAt", length = 10)
+	private int EWallet;
 	private Date createAt;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "updateAt", length = 10)
 	private Date updateAt;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<Transactions> transactionses;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<UserFollowProduct> userFollowProducts;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<Cart> carts;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<Orders> orderses;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<Store> stores;
-	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	private List<UserFollowStore> userFollowStores;
-	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users")
 	private UserLevel userLevel;
 
 	public Users() {
 		isEmailActive = true;
 		isPhoneActive = true;
+		role = 3;
 		point = 0;
 		createAt = new Date();
 		updateAt = new Date();
@@ -130,7 +63,7 @@ public class Users implements Serializable {
 
 	public Users(String firstName, String lastName, String slug, String idCard,
 			String email, String phone, Boolean isEmailActive, Boolean isPhoneActive, String hashedPassword,
-			Integer role, String addresses, String avatar, String cover, Integer point, BigDecimal EWallet,
+			Integer role, String addresses, String avatar, String cover, Integer point, int EWallet,
 			Date createAt, Date updateAt, List<Transactions> transactionses, List<UserFollowProduct> userFollowProducts,
 			List<Cart> carts, List<Orders> orderses, List<Store> stores, List<UserFollowStore> userFollowStores,
 			UserLevel userLevel) {
@@ -160,7 +93,10 @@ public class Users implements Serializable {
 		this.userLevel = userLevel;
 	}
 
-	
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
+
+	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -169,7 +105,7 @@ public class Users implements Serializable {
 		this.id = id;
 	}
 
-	
+	@Column(name = "firstName", nullable = false)
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -178,6 +114,7 @@ public class Users implements Serializable {
 		this.firstName = firstName;
 	}
 
+	@Column(name = "lastName", nullable = false)
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -186,6 +123,7 @@ public class Users implements Serializable {
 		this.lastName = lastName;
 	}
 
+	@Column(name = "slug", unique = true)
 	public String getSlug() {
 		return this.slug;
 	}
@@ -194,6 +132,7 @@ public class Users implements Serializable {
 		this.slug = slug;
 	}
 
+	@Column(name = "id_card")
 	public String getIdCard() {
 		return this.idCard;
 	}
@@ -202,7 +141,9 @@ public class Users implements Serializable {
 		this.idCard = idCard;
 	}
 	
-	
+	@Email(message = "Email không hợp lệ")
+	@NotEmpty
+	@Column(name = "email", unique = true)
 	public String getEmail() {
 		return this.email;
 	}
@@ -211,6 +152,7 @@ public class Users implements Serializable {
 		this.email = email;
 	}
 
+	@Column(name = "phone", length = 30)
 	public String getPhone() {
 		return this.phone;
 	}
@@ -219,6 +161,7 @@ public class Users implements Serializable {
 		this.phone = phone;
 	}
 
+	@Column(name = "isEmailActive")
 	public Boolean getIsEmailActive() {
 		return this.isEmailActive;
 	}
@@ -227,6 +170,7 @@ public class Users implements Serializable {
 		this.isEmailActive = isEmailActive;
 	}
 
+	@Column(name = "isPhoneActive")
 	public Boolean getIsPhoneActive() {
 		return this.isPhoneActive;
 	}
@@ -235,7 +179,8 @@ public class Users implements Serializable {
 		this.isPhoneActive = isPhoneActive;
 	}
 
-	
+	@NotEmpty
+	@Column(name = "hashed_password", nullable = false)
 	public String getHashedPassword() {
 		return this.hashedPassword;
 	}
@@ -244,6 +189,7 @@ public class Users implements Serializable {
 		this.hashedPassword = hashedPassword;
 	}
 
+	@Column(name = "role")
 	public Integer getRole() {
 		return this.role;
 	}
@@ -252,6 +198,7 @@ public class Users implements Serializable {
 		this.role = role;
 	}
 
+	@Column(name = "addresses")
 	public String getAddresses() {
 		return this.addresses;
 	}
@@ -260,6 +207,7 @@ public class Users implements Serializable {
 		this.addresses = addresses;
 	}
 
+	@Column(name = "avatar", length = 100)
 	public String getAvatar() {
 		return this.avatar;
 	}
@@ -268,6 +216,7 @@ public class Users implements Serializable {
 		this.avatar = avatar;
 	}
 
+	@Column(name = "cover", length = 100)
 	public String getCover() {
 		return this.cover;
 	}
@@ -276,6 +225,7 @@ public class Users implements Serializable {
 		this.cover = cover;
 	}
 
+	@Column(name = "point")
 	public Integer getPoint() {
 		return this.point;
 	}
@@ -284,15 +234,17 @@ public class Users implements Serializable {
 		this.point = point;
 	}
 
-	public BigDecimal getEWallet() {
+	@Column(name = "e_wallet", precision = 10)
+	public int getEWallet() {
 		return this.EWallet;
 	}
 
-	public void setEWallet(BigDecimal EWallet) {
+	public void setEWallet(int EWallet) {
 		this.EWallet = EWallet;
 	}
 
-	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "createAt", length = 10)
 	public Date getCreateAt() {
 		return this.createAt;
 	}
@@ -301,7 +253,8 @@ public class Users implements Serializable {
 		this.createAt = createAt;
 	}
 
-	
+	@Temporal(TemporalType.DATE)
+	@Column(name = "updateAt", length = 10)
 	public Date getUpdateAt() {
 		return this.updateAt;
 	}
@@ -310,6 +263,7 @@ public class Users implements Serializable {
 		this.updateAt = updateAt;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<Transactions> getTransactionses() {
 		return this.transactionses;
 	}
@@ -318,6 +272,7 @@ public class Users implements Serializable {
 		this.transactionses = transactionses;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<UserFollowProduct> getUserFollowProducts() {
 		return this.userFollowProducts;
 	}
@@ -326,6 +281,7 @@ public class Users implements Serializable {
 		this.userFollowProducts = userFollowProducts;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<Cart> getCarts() {
 		return this.carts;
 	}
@@ -334,6 +290,7 @@ public class Users implements Serializable {
 		this.carts = carts;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<Orders> getOrderses() {
 		return this.orderses;
 	}
@@ -342,6 +299,7 @@ public class Users implements Serializable {
 		this.orderses = orderses;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<Store> getStores() {
 		return this.stores;
 	}
@@ -350,6 +308,7 @@ public class Users implements Serializable {
 		this.stores = stores;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "users")
 	public List<UserFollowStore> getUserFollowStores() {
 		return this.userFollowStores;
 	}
@@ -358,6 +317,7 @@ public class Users implements Serializable {
 		this.userFollowStores = userFollowStores;
 	}
 
+	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users")
 	public UserLevel getUserLevel() {
 		return this.userLevel;
 	}
@@ -385,5 +345,26 @@ public class Users implements Serializable {
 		return store;
 
 	}
+	public UserFollowStore addUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().add(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
 
+	public UserFollowStore removeUserFollowStore(UserFollowStore userFollowStore) {
+		getUserFollowStores().remove(userFollowStore);
+		userFollowStore.setUsers(this);
+		return userFollowStore;
+	}
+	public UserFollowProduct addUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().add(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
+
+	public UserFollowProduct removeUserFollowProduct(UserFollowProduct userFollowProduct) {
+		getUserFollowProducts().remove(userFollowProduct);
+		userFollowProduct.setUsers(this);
+		return userFollowProduct;
+	}
 }
